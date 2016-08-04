@@ -1,0 +1,6 @@
+{
+  "name": "msk-app",
+  "short_name": "msk-app",
+  "start_url": "/",
+  "display": "standalone"
+}

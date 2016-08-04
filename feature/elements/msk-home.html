@@ -1,0 +1,458 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+
+<link rel="import" href="./modal-generator.html">
+<link rel="import" href="./msk-skills.html">
+<link rel="import" href="./msk-experience.html">
+<link rel="import" href="./msk-education.html">
+<link rel="import" href="./home-about-me.html">
+<dom-module id="msk-home">
+    <style>
+      :host{
+        font-size: 16px !important;
+        padding-right: 50px;
+        padding-left: 50px;
+        --msk-primary-color:  #00bcd4;
+        --msk-secondary-color: #ff4081;
+        --msk-tertiary-color: #fafafa;
+        --msk-disabled-color: #ff4081;
+        --msk-background-color: #ff4081;
+        --msk-text-primary-color: #fff;
+        --msk-text-secondary-color: #000;
+        --msk-text-special-color: #727272;
+      }
+        .msk-section {
+            display: block;
+            z-index: 0;
+            background: #fff;
+            width: 100%;
+            clear: both;
+            padding: 0px 12px 12px 12px;
+        }
+        .msk-section-child {
+            width: 49%;
+            padding: 10px 8px 10px 10px;
+        }
+        .msk-section-child a {
+            display: block;
+            border-bottom: 1px solid #e1e2e5;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        a:link, a:visited {
+            color: #4980c5;
+            font-weight: 600 !important;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        route-link{
+          font-weight: 600 !important;
+        }
+        .msk-title {
+            border-bottom: 1px solid #e1e2e5;
+        }
+      .side-menu{
+        width: 250px;
+        border: 1px solid #ccc;        
+      }
+       /* Iron-Flex Layout for form */
+          .flex-horizontal-with-ratios {
+          @apply(--layout-horizontal);
+          }
+          .flexchild {
+          @apply(--layout-flex);
+          }
+          .flex2child {
+          @apply(--layout-flex-2);
+          }
+          .flex3child {
+          @apply(--layout-flex-3);
+          }
+          .flex4child {
+          @apply(--layout-flex-4);
+          }
+          .flex6child {
+          @apply(--layout-flex-6);
+          }
+          .flex-end-justified {
+          @apply(--layout-horizontal);
+          @apply(--layout-end-justified);
+          }
+          .flex-center-justified {
+          @apply(--layout-horizontal);
+          @apply(--layout-center-justified);
+          }
+          .flex-start-justified {
+          @apply(--layout-horizontal);
+          @apply(--layout-start-justified);
+          }
+        .flex-end-justified {
+          @apply(--layout-horizontal);
+          @apply(--layout-end-justified);
+        }
+        .flex-end-align {
+          @apply(--layout-horizontal);
+          @apply(--layout-end);
+        }
+        .flex-center-end-align{
+          @apply(--layout-horizontal);
+          @apply(--layout-end);
+          @apply(--layout-center-justified);
+        }
+        .flex-vertical {
+          @apply(--layout-vertical);
+        }
+        .form-buttons{
+          margin-top: 25px;
+        }
+        textarea {
+            resize: none;
+        }
+        .form-container{
+          width: 400px; 
+          padding: 20px;
+          margin-bottom: 50px;
+        }
+      .section-skills{
+        font-family: 'Mirza';
+        background-color: var(--msk-primary-color, '#00bcd4');
+      }
+      .section-two{
+        font-family: 'Lato';
+        background-color: #fafafa !important;;
+        padding-bottom: 50px;
+      }
+      .section-two-head{
+        font-family: 'OpenSans';
+        font-size: 32px;
+        padding: 50px;
+      }
+      .section-two-subhead{
+        font-family: 'Titillium';
+        font-size: 18px;
+      }
+      .section-one{
+        font-family: 'Mirza';
+        background-color: var(--msk-primary-color, '#00bcd4');
+        padding-bottom: 10px;
+        @apply --shadow-elevation-2dp;
+      } 
+      .section-three{
+        font-family: 'Mirza';
+        background-color: var(--msk-primary-color, '#00bcd4');
+        padding-bottom: 50px;
+        @apply --shadow-elevation-2dp;
+      }
+      .section-experience{
+        font-family: 'Mirza';
+        background-color: #fafafa !important;
+        padding-bottom: 50px;
+        @apply --shadow-elevation-2dp;
+      }
+      .section-three-head{
+        font-family: 'Mirza';
+        font-size: 48px;
+        padding: 50px;
+      }
+      .section-three-subhead{
+        font-family: 'DancingScript';
+        font-size: 18px;
+      }
+      .section-four{
+        font-family: 'Mirza';
+        background-color: #fff !important;
+        padding-bottom: 50px;
+      }
+      .section-four-head{
+        font-family: 'Katibeh';
+        font-size: 48px;
+        padding: 50px;
+      }
+      .section-four-subhead{
+        font-family: 'Katibeh';
+        font-size: 18px;
+      }
+      
+      .center-me{
+        align-content: center;
+        text-align: center;
+      }
+      paper-button.msk-button{
+        padding: 0.9em 2.97em;
+        background-color: #fff !important;
+      }
+      paper-button.msk-button:hover{
+        background-color: #252525 !important;
+        color: #fff !important;
+        padding: 0.9em 2.97em;
+      }
+      iron-image{
+        margin: 0px auto;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); 
+        width:320px; 
+        height:260px; 
+        background-color: #fafafa !important;
+      }
+      .my-div{
+        color: rgb(114, 114, 114);
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgb(238, 238, 238);
+      }
+      .me{
+        font-family: 'Katibeh';
+        font-size: 48px;
+        color: #fff;
+      }
+      .me2{
+        font-family: 'Roboto';
+        font-size: 32px;
+        color: #fff;
+      }
+      .me3{
+        font-family: 'Roboto';
+        font-size: 24px;
+        color: #fff;
+      }
+      paper-fab {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 70px;
+        position: fixed;
+        right: 25px;
+        bottom: 12px; 
+        color: var(--msk-primary-color);
+        background-color: #fff;        
+      }
+      paper-toast {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 70px;
+        position: fixed;
+        right: 25px;
+        bottom: 12px; 
+        color: var(--msk-primary-color);
+        background-color: #fff;  
+        height: 150px;
+        max-width: 400px;      
+      }
+      .footer{
+        background: #f0f0f0;
+      }
+      .color-selection-bar{
+        height: 25px;
+        width: 25px;
+      } 
+      .flex-equal-around-justified {
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }  
+    </style>
+
+    <template>
+      <paper-toast id="toast1" duration="0" text="">
+        <div style="float: right;"><paper-button onclick="toast1.toggle()" class="yellow-button">Close now!</paper-button></div>
+        <div>
+          <span>Choose primary color -</span>
+          <div class="flex-horizontal-with-ratios">
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="#00bcd4"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" id="#ff4081"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" id="#C043D5"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" id="#73D077"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" id="#1ABBAC"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" id="#EAB82E"></a>
+            <a on-tap="selectColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="#799CAC"></a>  
+          </div>
+        </div> 
+        <div>
+          <span>Choose Secondary color -</span>
+          <div class="flex-horizontal-with-ratios">
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="#00bcd4"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" id="#ff4081"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" id="#C043D5"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" id="#73D077"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" id="#1ABBAC"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" id="#EAB82E"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="#799CAC"></a>  
+          </div>
+        </div>
+        <paper-button onclick="toast1.toggle()" class="yellow-button">Close now!</paper-button>
+      </paper-toast>
+      <paper-fab icon="settings" title="Settings" onclick="toast1.open()"></paper-fab>
+      
+
+      <div class="flex-equal-around-justified section-two">  
+        <div class="flex-equal-around-justified section-two-head">
+          <div class="flex3child">
+            <home-about-me title-me="About Me" footer-content="button">
+              <div>{{aboutMe}}</div>
+              <div>{{aboutMePara2}}</div>
+            </home-about-me>
+          </div>
+          <div class="flex2child center-me">
+              <msk-user-avatar type="main"></msk-user-avatar>
+          </div>
+          <div class="flex3child center">
+            <home-about-me title-me="Personal Details" footer-content="social">
+              <home-personal-info data={{userPersonalData}}></home-personal-info>
+            </home-about-me>
+          </div>
+        </div>
+      </div>
+      <div class="section-skills">
+        <div class="flex-center-justified section-three-head">
+          <msk-skills></msk-skills>
+        </div>
+      </div>
+      
+      <div class="section-experience">
+        <div class="flex-center-justified section-three-head">
+          <msk-experience></msk-experience>
+        </div>
+      </div>
+      <div class="section-skills">
+        <div class="flex-center-justified section-three-head">
+          <msk-education></msk-education>
+        </div>
+      </div>
+      <div class="section-footer">        
+        <div class="flex-center-justified section-four-head center-me">
+          <div style="width:25% "></div>
+          
+          <div style="width:25% "></div>
+        </div>
+        <div class="flex-center-justified section-four-subhead center-me">
+            <div style="width:25% "></div>
+            Copyright - www.khanshahid.com
+            <div style="width:25% "></div>
+        </div>      
+      </div>
+    </template>
+  
+    <script>
+        Polymer({
+            is: "msk-home",
+            properties: {
+              
+            },
+            ready: function () {
+              this.aboutMe = "I’m a Web Developer. I have been developing Web applications & Portals with strong Frontend and Backend experience for over 10 years now. I am currently working for GE Oil & Gas in Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. ";
+              this.aboutMePara2 = "Before falling in love with Frontend Development, I worked with Java/Java EE, Middleware and different databases.";
+              this.experienceTitle = "Experience";
+
+
+              this.headlineOne = ' Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.';
+              this.subheadOne= " Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.";
+              this.userPersonalData = {name: 'Mohammed Shahid Khan', phone: '0123456789', email: 'shahid.manit@gmail.com'};
+            },
+          populateData: function(e){
+              console.log(e.target.id);
+          },
+          handleTap: function (e){
+            var modalGen = document.createElement('modal-generator');
+            modalGen.id = e.target.id;
+            modalGen.title = 'Login';
+            modalGen.msg = 'This is the message';
+            modalGen.actionPositive = null;
+            modalGen.actionNegative = null;
+
+            var modalDiv = document.getElementById("modalSpace");
+            if(modalDiv.hasChildNodes()){
+              var childNodes = modalDiv.childNodes;
+              Polymer.dom(modalDiv).removeChild(childNodes[0]);  
+            }        
+            Polymer.dom(modalDiv).appendChild(modalGen);
+          },
+          selectColor: function(e,color) {
+            //var color="";
+            //console.log('Selected Color :'+color);
+            this.customStyle['--msk-primary-color'] = e.target.id;
+            this.updateStyles();
+          },
+          
+          selectSecondaryColor: function(e,color) {
+            //var color="";
+            //console.log('Selected Color :'+color);
+            this.customStyle['--msk-secondary-color'] = e.target.id;
+            this.updateStyles();
+          }         
+        });
+    </script>
+</dom-module>
+
+<dom-module id="home-personal-info">
+  <template>
+    <style is="custom-style" include="shared-styles">
+      :host{
+        font-family: 'Titillium';
+        font-size: 16px !important;
+        color: 
+      }
+      .my-div{
+        color: rgb(114, 114, 114);
+        margin: 0px 10px 12px 10px;
+        border-bottom: 1px solid rgb(238, 238, 238);
+      }
+      
+    </style>
+
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flex2child">Name :</div>
+      <div class="flex6child">{{data.name}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flex2child">Phone :</div>
+      <div class="flex6child">{{data.phone}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flex2child">Email :</div>
+      <div class="flex6child">{{data.email}}</div>
+    </div> 
+  </template>
+  <script>
+    Polymer({
+      is: 'home-personal-info',
+      properties: {
+        title: {
+          type: String,
+          notify: true,
+          value: 'My Story'
+        },
+        aboutMe: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+        name: {
+          type: String,
+          value: 'Shahid'
+        },
+        data: { 
+          type: Object,
+          notify: true,
+          value: {
+            name: '',
+            phone: '',
+            email: ''
+           }
+        }
+        
+      },
+      attached: function(){
+        this.data.name = 'Mohammed Shahid Khan'
+        this.data.phone = '01234512345';
+        this.data.email = 'shahid.manit@gmail.com';
+      }
+    });
+  </script>
+</dom-module>

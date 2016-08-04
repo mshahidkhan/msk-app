@@ -1,0 +1,127 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="./msk-home.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+  
+
+
+<dom-module id="home-component">
+   
+  <style is="custom-style">
+    body {
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      background-color: #eee;
+    }
+   
+    .avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      box-sizing: border-box;
+      background-color: #DDD;
+    }
+    .pad {
+      padding: 0 16px;
+      @apply(--layout-flex);
+      @apply(--layout-vertical);
+    }
+    .primary {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .secondary {
+      font-size: 14px;
+    }
+    .dim {
+      color: gray;
+    }
+    .spacer {
+      @apply(--layout-flex);
+    }
+    #router_mount {
+      display: block;
+      padding: 780px 0px 40px 0px;
+      
+    }
+    @media (max-width: 639px) {
+      [main-title] {
+        left: 85px;
+      }
+    }
+  </style>
+  <template>
+    <!--<header-main></header-main>-->
+    <!--<header-profile></header-profile>-->
+    <div id="mskHeaderArea"></div>
+    <div id="router_mount">
+      <msk-home></msk-home>
+    </div>
+    <div id="modalSpace"></div>
+  </template>
+  <script>
+    Polymer({
+      is: 'home-component',
+      properties: {
+        title: {
+          type: String,
+          value: 'Mohammed Shahid Khan'
+        },
+        isLoggedIn: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          observer: '_changeLogin'
+        }
+      },
+      ready: function(){
+       /*  var fab = document.querySelector('paper-fab');
+        var header = document.querySelector('app-header');
+        window.addEventListener('scroll', function() {
+          var progress = header.getScrollState().progress;
+          fab.toggleClass('shrink-to-hidden', progress > 0.5);
+        }); */ 
+      },
+      attached: function (){
+        this.decideHeaderElement(this.isLoggedIn);
+      },      
+      editProfile: function(){
+        Router.go("profile");
+      },
+      _changeLogin: function(newValue, oldValue){
+        console.log("Login info changed");
+        this.decideHeaderElement(newValue);
+      },
+      decideHeaderElement: function (loginFlag){ 
+        if(loginFlag){
+          var headerDiv = Polymer.dom(this.root).querySelector('#mskHeaderArea');
+          var homeEle =document.createElement('header-profile');
+
+          if(headerDiv.hasChildNodes()){
+            var childNodes = headerDiv.childNodes;
+            Polymer.dom(headerDiv).removeChild(childNodes[0]);
+          }
+          Polymer.dom(headerDiv).appendChild(homeEle);
+          console.log("Logged In");
+        }else{
+          var headerDiv = Polymer.dom(this.root).querySelector('#mskHeaderArea');
+          var homeEle =document.createElement('header-main');
+
+          if(headerDiv.hasChildNodes()){
+            var childNodes = headerDiv.childNodes;
+            Polymer.dom(headerDiv).removeChild(childNodes[0]);
+          }
+          Polymer.dom(headerDiv).appendChild(homeEle);
+          console.log("User is not logged in yet");
+        }
+      }
+    })
+  </script>
+ 
+</dom-module>
+
