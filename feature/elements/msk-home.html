@@ -17,7 +17,8 @@
 <link rel="import" href="./msk-education.html">
 <link rel="import" href="./home-about-me.html">
 <dom-module id="msk-home">
-    <style>
+    <template>
+      <style include="shared-styles">
       :host{
         font-size: 16px !important;
         padding-right: 50px;
@@ -31,99 +32,15 @@
         --msk-text-secondary-color: #000;
         --msk-text-special-color: #727272;
       }
-        .msk-section {
-            display: block;
-            z-index: 0;
-            background: #fff;
-            width: 100%;
-            clear: both;
-            padding: 0px 12px 12px 12px;
-        }
-        .msk-section-child {
-            width: 49%;
-            padding: 10px 8px 10px 10px;
-        }
-        .msk-section-child a {
-            display: block;
-            border-bottom: 1px solid #e1e2e5;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        a:link, a:visited {
-            color: #4980c5;
-            font-weight: 600 !important;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        route-link{
-          font-weight: 600 !important;
-        }
-        .msk-title {
-            border-bottom: 1px solid #e1e2e5;
-        }
+        
+      .msk-title {
+          border-bottom: 1px solid #e1e2e5;
+      }
       .side-menu{
         width: 250px;
         border: 1px solid #ccc;        
       }
-       /* Iron-Flex Layout for form */
-          .flex-horizontal-with-ratios {
-          @apply(--layout-horizontal);
-          }
-          .flexchild {
-          @apply(--layout-flex);
-          }
-          .flex2child {
-          @apply(--layout-flex-2);
-          }
-          .flex3child {
-          @apply(--layout-flex-3);
-          }
-          .flex4child {
-          @apply(--layout-flex-4);
-          }
-          .flex6child {
-          @apply(--layout-flex-6);
-          }
-          .flex-end-justified {
-          @apply(--layout-horizontal);
-          @apply(--layout-end-justified);
-          }
-          .flex-center-justified {
-          @apply(--layout-horizontal);
-          @apply(--layout-center-justified);
-          }
-          .flex-start-justified {
-          @apply(--layout-horizontal);
-          @apply(--layout-start-justified);
-          }
-        .flex-end-justified {
-          @apply(--layout-horizontal);
-          @apply(--layout-end-justified);
-        }
-        .flex-end-align {
-          @apply(--layout-horizontal);
-          @apply(--layout-end);
-        }
-        .flex-center-end-align{
-          @apply(--layout-horizontal);
-          @apply(--layout-end);
-          @apply(--layout-center-justified);
-        }
-        .flex-vertical {
-          @apply(--layout-vertical);
-        }
-        .form-buttons{
-          margin-top: 25px;
-        }
-        textarea {
-            resize: none;
-        }
-        .form-container{
-          width: 400px; 
-          padding: 20px;
-          margin-bottom: 50px;
-        }
+       
       .section-skills{
         font-family: 'Mirza';
         background-color: var(--msk-primary-color, '#00bcd4');
@@ -136,7 +53,7 @@
       .section-two-head{
         font-family: 'OpenSans';
         font-size: 32px;
-        padding: 50px;
+        padding: 25px;
       }
       .section-two-subhead{
         font-family: 'Titillium';
@@ -163,7 +80,7 @@
       .section-three-head{
         font-family: 'Mirza';
         font-size: 48px;
-        padding: 50px;
+        padding: 25px;
       }
       .section-three-subhead{
         font-family: 'DancingScript';
@@ -172,7 +89,7 @@
       .section-four{
         font-family: 'Mirza';
         background-color: #fff !important;
-        padding-bottom: 50px;
+        padding-bottom: 25px;
       }
       .section-four-head{
         font-family: 'Katibeh';
@@ -203,6 +120,7 @@
         width:320px; 
         height:260px; 
         background-color: #fafafa !important;
+        z-index: 1;
       }
       .my-div{
         color: rgb(114, 114, 114);
@@ -229,22 +147,23 @@
         margin-right: 10px;
         margin-bottom: 70px;
         position: fixed;
-        right: 25px;
+        right: 35px;
         bottom: 12px; 
-        color: var(--msk-primary-color);
-        background-color: #fff;        
+        color: var(--msk-secondary-color);
+        background-color: #fff;  
+        z-index: 100;      
       }
       paper-toast {
+        position: fixed;
+        bottom: 35px; 
+        right: 0px;
+        color: var(--msk-primary-color);
         margin-left: 10px;
         margin-right: 10px;
         margin-bottom: 70px;
-        position: fixed;
-        right: 25px;
-        bottom: 12px; 
-        color: var(--msk-primary-color);
         background-color: #fff;  
         height: 150px;
-        max-width: 400px;      
+        max-width: 300px;      
       }
       .footer{
         background: #f0f0f0;
@@ -257,11 +176,15 @@
         @apply(--layout-horizontal);
         @apply(--layout-around-justified);
       }  
+      
+      @media (max-width: 639px) {
+        paper-fab {
+          bottom: 25px; 
+        right: 0px;
+        }
+      }
     </style>
-
-    <template>
       <paper-toast id="toast1" duration="0" text="">
-        <div style="float: right;"><paper-button onclick="toast1.toggle()" class="yellow-button">Close now!</paper-button></div>
         <div>
           <span>Choose primary color -</span>
           <div class="flex-horizontal-with-ratios">
@@ -291,23 +214,24 @@
       <paper-fab icon="settings" title="Settings" onclick="toast1.open()"></paper-fab>
       
 
-      <div class="flex-equal-around-justified section-two">  
-        <div class="flex-equal-around-justified section-two-head">
-          <div class="flex3child">
+      <div class="flex-wrap section-two">  
+        <!-- <div class="flex-center-justified section-two-head"> -->
+          <div class="flexchild center-me">
+            <msk-user-avatar type="main"></msk-user-avatar>
+          </div>
+          <div class="flexchild">
             <home-about-me title-me="About Me" footer-content="button">
               <div>{{aboutMe}}</div>
               <div>{{aboutMePara2}}</div>
             </home-about-me>
           </div>
-          <div class="flex2child center-me">
-              <msk-user-avatar type="main"></msk-user-avatar>
-          </div>
-          <div class="flex3child center">
+          
+          <div class="flexchild center">
             <home-about-me title-me="Personal Details" footer-content="social">
               <home-personal-info data={{userPersonalData}}></home-personal-info>
             </home-about-me>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
       <div class="section-skills">
         <div class="flex-center-justified section-three-head">
