@@ -22,11 +22,13 @@
       }
       
       paper-card{
-        width: 20em;
-        height: 22em;
+        width: 22em;
+        height: 20em;
         margin-right: 25px;
         margin-top: 15px;
+        border: 2px solid  transparent;
         --paper-card-header-text: {
+          padding: 10px;
           font-size: 20px;
           background-color: #fff;
           color: var(--msk-primary-color, '#00bcd4');
@@ -40,6 +42,11 @@
           font-weight: 300;
           color: var(--msk-secondary-color, '#00bcd4');
         }
+      }
+
+      paper-card:hover{
+        @apply(--shadow-elevation-24dp);
+        border: 2px solid  var(--msk-secondary-color, '#00bcd4');
       }
      
       .flex-wrap {

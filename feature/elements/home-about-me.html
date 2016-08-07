@@ -42,13 +42,20 @@
         }
       }
       
+      paper-item a{
+        color: var(--msk-secondary-color);
+      }
+      paper-item:hover{
+        background-color: var(--msk-primary-color);
+        @apply(--shadow-elevation-24dp);
+      }
       paper-button {
         font-family: 'Titillium';
       }
 
     </style>
     <template>
-    <div class="flex-horizontal">
+    <!-- <div class="flex-horizontal"> -->
       <!--<div class="flexchild title">{{titleMe}} <i class="fa fa-pencil"></i></div>-->
       <hr class="horizontal-line">
       <paper-card heading="{{titleMe}}" elevation=0>
@@ -61,15 +68,31 @@
           </template>
           <template is="dom-if" if="{{showSocialIcons(footerContent)}}">
             <div class="flex-horizontal-with-ratios" style="height: 70px;">
-              <paper-item raised><i class="fa fa-twitter"></i></paper-item>
-              <paper-item raised><i class="fa fa-linkedin"></i></paper-item>
-              <paper-item raised><i class="fa fa-github"></i></paper-item>
-              <paper-item raised><i class="fa fa-facebook"></i></paper-item>
+              <paper-item raised>
+                <a href="http://www.linkedin.com/in/mohammed-shahid-khan" target="social" title="LinkedIn">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </paper-item>
+              <paper-item raised>
+                <a href="https://twitter.com/sh_a_hid" target="social" title="Twitter">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </paper-item>
+              <paper-item raised>
+                <a href="https://github.com/mshahidkhan" target="social" title="Github">
+                  <i class="fa fa-github"></i>
+                </a>
+                </paper-item>
+              <paper-item raised>
+                <a href="https://codepen.io/khanshahid" target="social" title="Codepen">
+                  <i class="fa fa-codepen"></i>
+                </a>
+              </paper-item>
             </div>
           </template>
         </div>
       </paper-card>
-    </div>
+    <!-- </div> -->
   </template>
   <script>
     Polymer({

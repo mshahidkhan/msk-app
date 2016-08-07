@@ -176,11 +176,23 @@
         @apply(--layout-horizontal);
         @apply(--layout-around-justified);
       }  
-      
+      .about-me{
+        min-width: 45%;
+      }
+      .my-details{
+        min-width: 45%;
+      }
+
       @media (max-width: 639px) {
         paper-fab {
           bottom: 25px; 
-        right: 0px;
+          right: 0px;
+        }
+         .about-me{
+          min-width: 75%;
+        }
+        .my-details{
+          min-width: 75%;
         }
       }
     </style>
@@ -219,14 +231,15 @@
           <div class="flexchild center-me">
             <msk-user-avatar type="main"></msk-user-avatar>
           </div>
-          <div class="flexchild">
+      </div>
+      <div class="flex-center-justified section-two">  
+          <div class="about-me">
             <home-about-me title-me="About Me" footer-content="button">
               <div>{{aboutMe}}</div>
               <div>{{aboutMePara2}}</div>
             </home-about-me>
-          </div>
-          
-          <div class="flexchild center">
+          </div>          
+          <div class="my-details center">
             <home-about-me title-me="Personal Details" footer-content="social">
               <home-personal-info data={{userPersonalData}}></home-personal-info>
             </home-about-me>
@@ -277,7 +290,7 @@
 
               this.headlineOne = ' Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.';
               this.subheadOne= " Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.";
-              this.userPersonalData = {name: 'Mohammed Shahid Khan', phone: '0123456789', email: 'shahid.manit@gmail.com'};
+              this.userPersonalData = {name: 'Mohammed Shahid Khan', phone: '0123456789', email: 'shahid.manit@gmail.com', location:'Oklahoma City, OK'};
             },
           populateData: function(e){
               console.log(e.target.id);
@@ -331,16 +344,20 @@
     </style>
 
     <div class="flex-horizontal-with-ratios my-div">
-      <div class="flex2child">Name :</div>
+      <div class="flexchild"><i class="fa fa-user"></i></div>
       <div class="flex6child">{{data.name}}</div>
     </div>
     <div class="flex-horizontal-with-ratios my-div">
-      <div class="flex2child">Phone :</div>
+      <div class="flexchild"><i class="fa fa-phone"></i></div>
       <div class="flex6child">{{data.phone}}</div>
     </div>
     <div class="flex-horizontal-with-ratios my-div">
-      <div class="flex2child">Email :</div>
+      <div class="flexchild"><i class="fa fa-envelope"></i></div>
       <div class="flex6child">{{data.email}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flexchild"><i class="fa fa-map-marker"></i></div>
+      <div class="flex6child">{{data.location}}</div>
     </div> 
   </template>
   <script>
@@ -367,15 +384,16 @@
           value: {
             name: '',
             phone: '',
-            email: ''
+            email: '',
+            location: ''
            }
-        }
-        
+        }        
       },
       attached: function(){
         this.data.name = 'Mohammed Shahid Khan'
         this.data.phone = '01234512345';
         this.data.email = 'shahid.manit@gmail.com';
+        this.data.location = 'Oklahoma City, OK';
       }
     });
   </script>
