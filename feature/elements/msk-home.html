@@ -156,9 +156,9 @@
       paper-toast {
         position: fixed;
         bottom: 35px; 
+        left: 600px;
         right: 0px;
         color: var(--msk-primary-color);
-        margin-left: 10px;
         margin-right: 10px;
         margin-bottom: 70px;
         background-color: #fff;  
@@ -182,6 +182,9 @@
       .my-details{
         min-width: 45%;
       }
+      .toast-close{
+        min-width: 25px;
+      }
 
       @media (max-width: 639px) {
         paper-fab {
@@ -196,9 +199,13 @@
         }
       }
     </style>
-      <paper-toast id="toast1" duration="0" text="">
+      <paper-toast id="toast1" class="capsule" horizontal-align="right" duration="0" text="">
         <div>
           <span>Choose primary color -</span>
+          <span style="float:right; text-align: right;">
+            <paper-button onclick="toast1.toggle()" class="toast-close">
+              <i class="fa fa-close"></i>
+            </paper-button></span>
           <div class="flex-horizontal-with-ratios">
             <a on-tap="selectColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="#00bcd4"></a>
             <a on-tap="selectColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" id="#ff4081"></a>
@@ -221,7 +228,7 @@
             <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="#799CAC"></a>  
           </div>
         </div>
-        <paper-button onclick="toast1.toggle()" class="yellow-button">Close now!</paper-button>
+        <paper-button onclick="toast1.toggle()" class="yellow-button">Close</paper-button>
       </paper-toast>
       <paper-fab icon="settings" title="Settings" onclick="toast1.open()"></paper-fab>
       
