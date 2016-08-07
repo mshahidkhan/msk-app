@@ -7,7 +7,7 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
 
 <dom-module id="msk-card">
-  <template>
+  
     <style is="custom-style" include="shared-styles">
       :host{
         font-family: 'Titillium';
@@ -26,10 +26,11 @@
         margin-top: 10px;
       }
       paper-card{
-        width: 20em;
+        width: 22em;
         min-height: 12em; 
         margin-right: 25px;
         margin-top: 25px;
+        border: 2px solid  transparent;
         --paper-card-header-text: {
           font-size: 20px;
           background-color: var(--msk-text-primary-color, '#00bcd4');
@@ -46,19 +47,21 @@
         }
       }
       paper-card:hover{
-        @apply(--shadow-elevation-24dp);      
+        @apply(--shadow-elevation-24dp);
+        border: 2px solid  var(--msk-secondary-color, '#00bcd4');
          --paper-card-content: {
           background-color: blue !important;
         }
-
       }
-      
+     
       paper-progress {
         --paper-progress-transition-duration: 0.88s;
         --paper-progress-transition-timing-function: ease;
         --paper-progress-transition-transition-delay: 0s;
       }
+      .Advance
     </style>
+    <template>
       <paper-card heading="{{cardData.type}}" elevation="2" animated id="{{cardData.type}}">
         <div class="card-content">
           <template is="dom-repeat" items={{cardData.skill}}>
@@ -102,13 +105,15 @@
       },   
       computeProficiency: function(value){
         if(value >= 70){
-          return 'Advanced'
+          return 'Advance'
+        }else if(value >= 60){
+          return 'Good';
         }else if(value >= 50){
-          return 'Good'
+          return 'Ok';
         }else if(value >=40){
-          return 'Can Work'
+          return 'Can Work';
         }else if(value < 40){
-          return 'Learning'
+          return 'Learning';
         }
       },  
       ready: function(){
