@@ -10,7 +10,6 @@
       :host{
         font-family: 'Titillium';
         font-size: 14px !important;
-
       }
 
       .title{
@@ -24,9 +23,9 @@
       
       paper-card{
         width: 20em;
-        height: 24em;
+        height: 22em;
         margin-right: 25px;
-        margin-top: 25px;
+        margin-top: 15px;
         --paper-card-header-text: {
           font-size: 20px;
           background-color: #fff;
@@ -42,53 +41,7 @@
           color: var(--msk-secondary-color, '#00bcd4');
         }
       }
-      .paper-card-1 .header.paper-card .title-text.paper-card{
-        font-size: 18px;
-      }
-
-      .slideTextUp div:nth-child(2) {
-        top: 100%;
-      }
-
-      .slideTextUp:hover div {
-        -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-        transform: translateY(-100%);
-      }
-
-      .tile {
-        float: left;
-        margin: 0 auto 1%;
-        color: white;
-        font-size: 1.3em;
-        text-align: center;
-        height: 8em;
-        font-weight: 300;
-        overflow: hidden;
-        cursor: pointer;
-        position: relative;
-        background-color: #fff;
-        color: #333;
-        position: relative;
-        -webkit-transition: background-color 0.2s ease-out;
-        transition: background-color 0.2s ease-out;
-      }
-
-      paper-slider{
-        width: 50%;
-        --paper-slider-height: 10px;
-        --paper-slider-disabled-knob-color: #ff4081;
-        --paper-slider-disabled-active-color: #ff4081;
-        --paper-slider-knob-color: #ff4081;
-        --paper-slider-active-color: #ff4081;
-      }
-      
-      paper-progress {
-        --paper-progress-height: 50px;
-        --paper-progress-transition-duration: 2.8s;
-        --paper-progress-transition-timing-function: ease;
-        --paper-progress-transition-transition-delay: 0s;
-      }
+     
       .flex-wrap {
         @apply(--layout-horizontal);
         @apply(--layout-wrap);

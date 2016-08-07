@@ -1,0 +1,128 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+
+<dom-module id="msk-card">
+  <template>
+    <style is="custom-style" include="shared-styles">
+      :host{
+        font-family: 'Titillium';
+        font-size: 14px !important;
+      }
+
+      .title{
+        font-size: 42px;
+        color: #fff;
+        padding: 20px 0px 20px 0px;
+      }      
+      .icon-span{
+        padding-right: 10px;
+      }
+      .card-item{
+        margin-top: 10px;
+      }
+      paper-card{
+        width: 20em;
+        min-height: 12em; 
+        margin-right: 25px;
+        margin-top: 25px;
+        --paper-card-header-text: {
+          font-size: 20px;
+          background-color: var(--msk-text-primary-color, '#00bcd4');
+          color: var(--msk-primary-color, '#00bcd4');
+        }
+        --paper-card-content: {
+          background-color: #fafafa !important;
+          font-size: 16px;
+          
+        }
+        --paper-card-actions: {
+          font-size: 16px;
+          color: #ff4081 !important;
+        }
+      }
+      paper-card:hover{
+        @apply(--shadow-elevation-24dp);      
+         --paper-card-content: {
+          background-color: blue !important;
+        }
+
+      }
+      
+      paper-progress {
+        --paper-progress-transition-duration: 0.88s;
+        --paper-progress-transition-timing-function: ease;
+        --paper-progress-transition-transition-delay: 0s;
+      }
+    </style>
+      <paper-card heading="{{cardData.type}}" elevation="2" animated id="{{cardData.type}}">
+        <div class="card-content">
+          <template is="dom-repeat" items={{cardData.skill}}>
+          <div class="card-item">
+            <span>{{item.tech}}</span>
+            <span style="float: right; font-size:12px;" class$="">{{computeProficiency(item.value)}}</span>
+          </div>
+          <div class="card-item">
+            <paper-progress value="{{item.value}}" min="0" max="100" class="red" ></paper-progress>
+          </div>
+          </template>
+        </div>
+        <div class="card-actions">
+          <!-- <span class="icon-span"><i class="fa fa-line-chart"></i></span>
+          <span>{{cardData.proficiency}}</span>
+          <div class="flex-center-justified"> 
+            <paper-slider id="ratings" pin transiting min="0" max="10" max-markers="10" value="{{cardData.ratings}}" disabled></paper-slider>
+          </div>  --> 
+        </div>
+      </paper-card>
+  </template>
+  <script>
+    Polymer({
+      is: 'msk-card',
+      behaviors: [Polymer.NeonAnimationRunnerBehavior],
+      properties: {
+        cardData: {
+          type: Object,
+          notify: true
+        },
+        animationConfig: {
+          value: function(){
+            return {
+              'entry': {
+                name: 'scale-up-animation',
+                node: this //or this.$.child
+              }
+            }
+          }
+        }
+      },   
+      computeProficiency: function(value){
+        if(value >= 70){
+          return 'Advanced'
+        }else if(value >= 50){
+          return 'Good'
+        }else if(value >=40){
+          return 'Can Work'
+        }else if(value < 40){
+          return 'Learning'
+        }
+      },  
+      ready: function(){
+        console.log("MSK Card Ready" + this.cardData);
+        this.playAnimation('entry');
+      },
+      attached: function(){
+        console.log("MSK Card" + this.cardData);
+        
+      },
+      detached: function(){
+        this.playAnimation('exit');
+      }
+      
+    });
+  </script>
+</dom-module>

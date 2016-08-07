@@ -131,12 +131,27 @@
       font: 700 4vw "Mirza", script;
       font-style: italic;
       color: var(--msk-primary-color, '#00bcd4');
-      padding-left: 20px;
+      padding-left: 10px;
     }
     @media (max-width: 639px) {
       [main-title] {
         left: 85px;
         bottom: 50px;
+      }
+      app-header{
+        height: 100%;
+      }
+      .my-heading{
+        bottom: 25%;
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+      }
+      .my-sub-head{
+        bottom: 22%;
+       
+      }
+      .my-name{
+        color: var(--msk-primary-color, '#00bcd4');
       }
     }
   </style>
