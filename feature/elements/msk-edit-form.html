@@ -43,8 +43,20 @@
           padding: 0px 10px 0px 10px;
         }
 
-        .social-section{
-                    
+        .details-section > paper-input{
+          --paper-input-container-focus-color: var(--msk-primary-color);
+          --paper-input-container-input-color: var(--msk-primary-color);
+          --paper-input-prefix: {
+              color: var(--msk-primary-color);
+            } 
+        }
+
+        .social-section > paper-input{
+          --paper-input-container-focus-color: var(--msk-secondary-color);
+          --paper-input-container-input-color: var(--msk-primary-color);
+          --paper-input-prefix: {
+              color: var(--msk-secondary-color);
+            } 
         }
 
     </style>
@@ -59,7 +71,6 @@
                 <paper-button dialog-confirm on-tap="saveForm">Save</paper-button>
               </div>
             </form>
-
           </div>
             <!-- <form>
                 <paper-textarea id="{{aboutmetext}}" label="autoresizing textarea input"></paper-textarea>
@@ -69,45 +80,46 @@
         <template is="dom-if" if="{{isDetailsForm(type)}}">
           <div>
             <form id="detailsForm">
-              <paper-input id="name" label="Your Full Name" required auto-validate error-message="needs some text!">
-                <div class="input-icon" prefix>
-                  <i class="fa fa-user"></i>
-                </div>
-              </paper-input>
-              <paper-input id="phone" label="Tring Tring">
-                <div class="input-icon" prefix>
-                  <i class="fa fa-phone"></i>
-                </div>
-              </paper-input>
-              <paper-input id="email" label="Email" required auto-validate error-message="needs some text!">
-                <div class="input-icon" prefix>
-                  <i class="fa fa-envelope"></i>
-                </div>
-              </paper-input>
-              <paper-input id="location" label="Location" required auto-validate error-message="needs some text!">
-                <div class="input-icon" prefix>
-                  <i class="fa fa-map-marker"></i>
-                </div>
-              </paper-input>
+            <div class="details-section" style="margin: 10px;">
+                <paper-input id="name" value="{{details.personal.name}}" label="Your Full Name" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-user"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="phone" value="{{details.personal.phone}}" label="Tring Tring">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-phone"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="email" value="{{details.personal.email}}" label="Email" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="location" value="{{details.personal.location}}" label="Location" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-map-marker"></i>
+                  </div>
+                </paper-input>
+              </div>
 
-
-              <div class="social-section" style="margin: 10px; background-color: lightgray;">
-                <paper-input id="linkedIn">
+              <div class="social-section" style="margin: 10px;">
+                <paper-input value="{{details.social.linkedin}}" id="linkedIn">
                   <div class="input-icon" prefix>
                     <i class="fa fa-linkedin"></i>
                   </div>
                 </paper-input>
-                <paper-input id="twitter">
+                <paper-input value="{{details.social.twitter}}" id="twitter">
                   <div class="input-icon" prefix>
                     <i class="fa fa-twitter"></i>
                   </div>
                 </paper-input>
-                <paper-input id="github">
+                <paper-input value="{{details.social.github}}" id="github">
                   <div class="input-icon" prefix>
                     <i class="fa fa-github"></i>
                   </div>
                 </paper-input>
-                <paper-input id="codepen">
+                <paper-input value="{{details.social.codepen}}" id="codepen">
                   <div class="input-icon" prefix>
                     <i class="fa fa-codepen"></i>
                   </div>
@@ -115,7 +127,7 @@
               </div>    
             </form>
             <div style="text-align: right; margin-top: 15px;">
-              <paper-button on-tap="saveDetailsForm">Save</paper-button>
+              <paper-button dialog-confirm on-tap="saveDetailsForm">Save</paper-button>
             </div>
           </div>
           <div>
@@ -135,6 +147,10 @@
                 type: {
                     type: String,
                     notify: true
+                },
+                details: {
+                  type: Object,
+                  notify: true
                 }
             },
             ready: function () {
@@ -161,7 +177,9 @@
                     return false;
             },
             saveDetailsForm: function(){
-              console.log('save Details Form');
+              var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
+              home.set('userPersonalData.personal', this.details.personal);
+              home.set('userPersonalData.social', this.details.social);
             }
         });
     </script>

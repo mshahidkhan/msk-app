@@ -5,7 +5,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="./msk-edit-form.html">
-
+<link rel="import" href="./msk-personal-info.html">
 
 <dom-module id="home-about-me">
   
@@ -92,7 +92,7 @@
             <div>{{aboutMe}}</div>
           </template>
            <template is="dom-if" if="{{isDetail(type)}}">       
-            <content></content>
+            <msk-personal-info data={{detailsData}}></msk-personal-info>
           </template>
         </div>
         <div class="card-actions">
@@ -102,22 +102,22 @@
           <template is="dom-if" if="{{showSocialIcons(footerContent)}}">
             <div class="flex-horizontal-with-ratios social-icons" >
               <paper-item raised>
-                <a href="http://www.linkedin.com/in/mohammed-shahid-khan" target="social" title="LinkedIn">
+                <a href="{{detailsData.social.linkedin}}" target="social" title="LinkedIn">
                   <i class="fa fa-linkedin"></i>
                 </a>
               </paper-item>
               <paper-item raised>
-                <a href="https://twitter.com/sh_a_hid" target="social" title="Twitter">
+                <a href="{{detailsData.social.twitter}}" target="social" title="Twitter">
                   <i class="fa fa-twitter"></i>
                 </a>
               </paper-item>
               <paper-item raised>
-                <a href="https://github.com/mshahidkhan" target="social" title="Github">
+                <a href="{{detailsData.social.github}}" target="social" title="Github">
                   <i class="fa fa-github"></i>
                 </a>
                 </paper-item>
               <paper-item raised>
-                <a href="https://codepen.io/khanshahid" target="social" title="Codepen">
+                <a href="{{detailsData.social.codepen}}" target="social" title="Codepen">
                   <i class="fa fa-codepen"></i>
                 </a>
               </paper-item>
@@ -140,10 +140,14 @@
         footerContent: {
           type: String,
           notify: true
-        }        
+        },
+        detailsData: {
+          type: Object,
+          notify: true
+        }
       },
-      ready: function(){
-        
+      attached: function(){
+        //this.details = this.detailsData;
       },
       isResumeButton: function(footerContent){
         if(footerContent === 'button'){
@@ -154,10 +158,15 @@
       },
       editMe: function(e){
         var modalGen = document.createElement('modal-generator');
-
+        modalGen.title = "Edit Personal Details"
         var editForm = document.createElement('msk-edit-form');
         editForm.type = e.target.type;
-        editForm.aboutMe = this.aboutMe;
+        if(e.target.type === 'aboutme'){
+          editForm.aboutMe = this.aboutMe;  
+        }else if(e.target.type === 'details'){
+          editForm.details = this.detailsData;
+        }
+        
         modalGen.$$('#main-container').appendChild(editForm);
         modalGen.id = e.target.id;
 

@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="msk-personal-info">
+  <template>
+    <style is="custom-style" include="shared-styles">
+      :host{
+        font-family: 'Titillium';
+        font-size: 16px !important;
+        color: 
+      }
+      .my-div{
+        color: rgb(114, 114, 114);
+        margin: 0px 10px 12px 10px;
+        border-bottom: 1px solid rgb(238, 238, 238);
+      }
+      
+    </style>
+
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flexchild"><i class="fa fa-user"></i></div>
+      <div class="flex6child">{{data.personal.name}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flexchild"><i class="fa fa-phone"></i></div>
+      <div class="flex6child">{{data.personal.phone}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flexchild"><i class="fa fa-envelope"></i></div>
+      <div class="flex6child">{{data.personal.email}}</div>
+    </div>
+    <div class="flex-horizontal-with-ratios my-div">
+      <div class="flexchild"><i class="fa fa-map-marker"></i></div>
+      <div class="flex6child">{{data.personal.location}}</div>
+    </div> 
+  </template>
+  <script>
+    Polymer({
+      is: 'msk-personal-info',
+      properties: {
+        title: {
+          type: String,
+          notify: true,
+          value: 'My Story'
+        },
+        aboutMe: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+        name: {
+          type: String,
+          value: 'Shahid'
+        },
+        data: { 
+          type: Object,
+          notify: true
+        }        
+      },
+      attached: function(){
+        
+      }
+    });
+  </script>
+</dom-module>
