@@ -16,6 +16,8 @@
 <link rel="import" href="./msk-experience.html">
 <link rel="import" href="./msk-education.html">
 <link rel="import" href="./home-about-me.html">
+<link rel="import" href="./msk-customize-button.html">
+
 <dom-module id="msk-home">
     <template>
       <style include="shared-styles">
@@ -31,8 +33,17 @@
         --msk-text-primary-color: #fff;
         --msk-text-secondary-color: #000;
         --msk-text-special-color: #727272;
-      }
-        
+      };
+      :root{
+         --msk-primary-color:  #00bcd4;
+        --msk-secondary-color: #ff4081;
+        --msk-tertiary-color: #fafafa;
+        --msk-disabled-color: #ff4081;
+        --msk-background-color: #ff4081;
+        --msk-text-primary-color: #fff;
+        --msk-text-secondary-color: #000;
+        --msk-text-special-color: #727272;
+      };
       .msk-title {
           border-bottom: 1px solid #e1e2e5;
       }
@@ -87,17 +98,17 @@
         font-size: 18px;
       }
       .section-four{
-        font-family: 'Mirza';
+        font-family: 'Titillium';
         background-color: #fff !important;
         padding-bottom: 25px;
       }
       .section-four-head{
-        font-family: 'Katibeh';
+        font-family: 'Titillium';
         font-size: 48px;
         padding: 50px;
       }
       .section-four-subhead{
-        font-family: 'Katibeh';
+        font-family: 'Titillium';
         font-size: 18px;
       }
       
@@ -197,8 +208,15 @@
         .my-details{
           min-width: 75%;
         }
+        .home-details-section{
+          flex-direction: column;
+        }
+        .section-four-subhead{
+          font-size: 10px;
+        }
       }
     </style>
+      <div id="modalSpace"></div>
       <paper-toast id="toast1" class="capsule" horizontal-align="right" duration="0" text="">
         <div>
           <span>Choose primary color -</span>
@@ -219,13 +237,13 @@
         <div>
           <span>Choose Secondary color -</span>
           <div class="flex-horizontal-with-ratios">
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="#00bcd4"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" id="#ff4081"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" id="#C043D5"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" id="#73D077"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" id="#1ABBAC"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" id="#EAB82E"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="#799CAC"></a>  
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="1#00bcd4"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" id="1#ff4081"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" id="1#C043D5"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" id="1#73D077"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" id="1#1ABBAC"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" id="1#EAB82E"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="1#799CAC"></a>  
           </div>
         </div>
         <paper-button onclick="toast1.toggle()" class="yellow-button">Close</paper-button>
@@ -237,18 +255,18 @@
         <!-- <div class="flex-center-justified section-two-head"> -->
           <div class="flexchild center-me">
             <msk-user-avatar type="main"></msk-user-avatar>
+            <paper-button on-tap="editEnable" class="yellow-button">Edit Enable</paper-button>
+            <!-- <msk-customize-button button-title="Make My Profile"></msk-customize-button> -->
           </div>
       </div>
-      <div class="flex-center-justified section-two">  
-          <div class="about-me">
-            <home-about-me title-me="About Me" footer-content="button">
-              <div>{{aboutMe}}</div>
-              <div>{{aboutMePara2}}</div>
+      <div class="flex-center-justified section-two home-details-section">  
+          <div class="about-me" style="margin-right: 4vw;">
+            <home-about-me title-me="About Me" type="aboutme" about-me="{{aboutMe}}" footer-content="button" edit-enabled={{editEnabled}} >
             </home-about-me>
           </div>          
           <div class="my-details center">
-            <home-about-me title-me="Personal Details" footer-content="social">
-              <home-personal-info data={{userPersonalData}}></home-personal-info>
+            <home-about-me title-me="Personal Details" type="details" details-data={{userPersonalData}} footer-content="social" edit-enabled={{editEnabled}}>
+              
             </home-about-me>
           </div>
         <!-- </div> -->
@@ -277,7 +295,7 @@
         </div>
         <div class="flex-center-justified section-four-subhead center-me">
             <div style="width:25% "></div>
-            Copyright - www.khanshahid.com
+            Copyright (c) 2016, - www.khanshahid.com
             <div style="width:25% "></div>
         </div>      
       </div>
@@ -287,6 +305,33 @@
         Polymer({
             is: "msk-home",
             properties: {
+              editEnabled: {
+                type: Boolean,
+                notify: true,
+                value: false
+              },
+              aboutMe: {
+                type: String,
+                notify: true  
+              },
+              userPersonalData:{
+                type: Object,
+                notify: true,
+                value: {
+                  personal: {
+                  name: 'Mohammed Shahid Khan', 
+                  phone: '0123456789', 
+                  email: 'shahid.manit@gmail.com', 
+                  location:'Oklahoma City, OK'
+                  },                
+                  social: {
+                    linkedin: 'http://www.linkedin.com/in/mohammed-shahid-khan' ,
+                    twitter: 'https://twitter.com/sh_a_hid',
+                    github: 'https://github.com/mshahidkhan',
+                    codepen: 'https://codepen.io/khanshahid'
+                  }
+                }
+              }
               
             },
             ready: function () {
@@ -297,10 +342,25 @@
 
               this.headlineOne = ' Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.';
               this.subheadOne= " Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.";
-              this.userPersonalData = {name: 'Mohammed Shahid Khan', phone: '0123456789', email: 'shahid.manit@gmail.com', location:'Oklahoma City, OK'};
+              this.userPersonalData = {
+                personal: {
+                  name: 'Mohammed Shahid Khan', 
+                  phone: '0123456789', 
+                  email: 'shahid.manit@gmail.com', 
+                  location:'Oklahoma City, OK'
+                },                
+                social: {
+                  linkedin: 'http://www.linkedin.com/in/mohammed-shahid-khan' ,
+                  twitter: 'https://twitter.com/sh_a_hid',
+                  github: 'https://github.com/mshahidkhan',
+                  codepen: 'https://codepen.io/khanshahid'
+                }};
             },
           populateData: function(e){
               console.log(e.target.id);
+          },
+          editEnable: function(e){
+            this.editEnabled = !this.editEnabled;
           },
           handleTap: function (e){
             var modalGen = document.createElement('modal-generator');
@@ -318,8 +378,7 @@
             Polymer.dom(modalDiv).appendChild(modalGen);
           },
           selectColor: function(e,color) {
-            //var color="";
-            //console.log('Selected Color :'+color);
+            
             this.customStyle['--msk-primary-color'] = e.target.id;
             this.updateStyles();
           },
@@ -327,81 +386,12 @@
           selectSecondaryColor: function(e,color) {
             //var color="";
             //console.log('Selected Color :'+color);
-            this.customStyle['--msk-secondary-color'] = e.target.id;
+            this.customStyle['--msk-secondary-color'] = e.target.id.substring(1);
             this.updateStyles();
+          },
+          customizeProfile: function(){
+            console.log("Customize Profile");
           }         
         });
     </script>
-</dom-module>
-
-<dom-module id="home-personal-info">
-  <template>
-    <style is="custom-style" include="shared-styles">
-      :host{
-        font-family: 'Titillium';
-        font-size: 16px !important;
-        color: 
-      }
-      .my-div{
-        color: rgb(114, 114, 114);
-        margin: 0px 10px 12px 10px;
-        border-bottom: 1px solid rgb(238, 238, 238);
-      }
-      
-    </style>
-
-    <div class="flex-horizontal-with-ratios my-div">
-      <div class="flexchild"><i class="fa fa-user"></i></div>
-      <div class="flex6child">{{data.name}}</div>
-    </div>
-    <div class="flex-horizontal-with-ratios my-div">
-      <div class="flexchild"><i class="fa fa-phone"></i></div>
-      <div class="flex6child">{{data.phone}}</div>
-    </div>
-    <div class="flex-horizontal-with-ratios my-div">
-      <div class="flexchild"><i class="fa fa-envelope"></i></div>
-      <div class="flex6child">{{data.email}}</div>
-    </div>
-    <div class="flex-horizontal-with-ratios my-div">
-      <div class="flexchild"><i class="fa fa-map-marker"></i></div>
-      <div class="flex6child">{{data.location}}</div>
-    </div> 
-  </template>
-  <script>
-    Polymer({
-      is: 'home-personal-info',
-      properties: {
-        title: {
-          type: String,
-          notify: true,
-          value: 'My Story'
-        },
-        aboutMe: {
-          type: String,
-          notify: true,
-          value: ''
-        },
-        name: {
-          type: String,
-          value: 'Shahid'
-        },
-        data: { 
-          type: Object,
-          notify: true,
-          value: {
-            name: '',
-            phone: '',
-            email: '',
-            location: ''
-           }
-        }        
-      },
-      attached: function(){
-        this.data.name = 'Mohammed Shahid Khan'
-        this.data.phone = '01234512345';
-        this.data.email = 'shahid.manit@gmail.com';
-        this.data.location = 'Oklahoma City, OK';
-      }
-    });
-  </script>
 </dom-module>

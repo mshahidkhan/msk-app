@@ -4,6 +4,9 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="./msk-edit-form.html">
+<link rel="import" href="./msk-personal-info.html">
+
 <dom-module id="home-about-me">
   
     <style include="shared-styles">
@@ -35,7 +38,7 @@
         --paper-card-background-color: #fafafa;
         font-family: 'Titillium';
         width: 100%;
-        height: 250px;
+        height: 300px;
         --paper-card-header-color: var(--msk-primary-color);
         --paper-card-actions: {
           color: var(--msk-secondary-color);
@@ -52,39 +55,69 @@
       paper-button {
         font-family: 'Titillium';
       }
+      .heading{
+        padding-bottom: 16px;
+        width: 100%;
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--msk-primary-color);
+      }
+      .card-content{
+        height: 200px;
+      }
+      .card-actions{
+        max-height: 4vw ;
+      }
+      .social-icons{
+        height: 50px;
+      }
 
     </style>
     <template>
     <!-- <div class="flex-horizontal"> -->
       <!--<div class="flexchild title">{{titleMe}} <i class="fa fa-pencil"></i></div>-->
       <hr class="horizontal-line">
-      <paper-card heading="{{titleMe}}" elevation=0>
+      <paper-card heading="" elevation=1>
+
         <div class="card-content">
-          <content></content>
+          <div class="heading">
+            <span>{{titleMe}}</span>
+            <template is="dom-if" if="{{editEnabled}}">
+              <span style="float: right; "><paper-button on-tap="editMe" type={{type}} style="min-width: 25px; padding: 0px;">
+                <i class="fa fa-pencil" type={{type}}></i></paper-button> </span>
+            </template>
+          </div>   
+          <template is="dom-if" if="{{isAboutMe(type)}}">       
+            <div>{{aboutMe2}}</div>
+            <div>{{aboutMe}}</div>
+          </template>
+           <template is="dom-if" if="{{isDetail(type)}}">       
+            <msk-personal-info data={{detailsData}}></msk-personal-info>
+          </template>
         </div>
         <div class="card-actions">
           <template is="dom-if" if="{{isResumeButton(footerContent)}}">
             <paper-button elevation="2">Download My Resume</paper-button>
           </template>
           <template is="dom-if" if="{{showSocialIcons(footerContent)}}">
-            <div class="flex-horizontal-with-ratios" style="height: 70px;">
+            <div class="flex-horizontal-with-ratios social-icons" >
               <paper-item raised>
-                <a href="http://www.linkedin.com/in/mohammed-shahid-khan" target="social" title="LinkedIn">
+                <a href="{{detailsData.social.linkedin}}" target="social" title="LinkedIn">
                   <i class="fa fa-linkedin"></i>
                 </a>
               </paper-item>
               <paper-item raised>
-                <a href="https://twitter.com/sh_a_hid" target="social" title="Twitter">
+                <a href="{{detailsData.social.twitter}}" target="social" title="Twitter">
                   <i class="fa fa-twitter"></i>
                 </a>
               </paper-item>
               <paper-item raised>
-                <a href="https://github.com/mshahidkhan" target="social" title="Github">
+                <a href="{{detailsData.social.github}}" target="social" title="Github">
                   <i class="fa fa-github"></i>
                 </a>
                 </paper-item>
               <paper-item raised>
-                <a href="https://codepen.io/khanshahid" target="social" title="Codepen">
+                <a href="{{detailsData.social.codepen}}" target="social" title="Codepen">
                   <i class="fa fa-codepen"></i>
                 </a>
               </paper-item>
@@ -103,19 +136,18 @@
           notify: true,
           value: 'My Story'
         },
-        aboutMe: {
-          type: String,
-          notify: true,
-          value: ''
-        },
+        
         footerContent: {
           type: String,
           notify: true
+        },
+        detailsData: {
+          type: Object,
+          notify: true
         }
-        
       },
-      ready: function(){
-        
+      attached: function(){
+        //this.details = this.detailsData;
       },
       isResumeButton: function(footerContent){
         if(footerContent === 'button'){
@@ -124,13 +156,46 @@
           return false;
         }
       },
+      editMe: function(e){
+        var modalGen = document.createElement('modal-generator');
+        modalGen.title = "Edit Personal Details"
+        var editForm = document.createElement('msk-edit-form');
+        editForm.type = e.target.type;
+        if(e.target.type === 'aboutme'){
+          editForm.aboutMe = this.aboutMe;  
+        }else if(e.target.type === 'details'){
+          editForm.details = this.detailsData;
+        }
+        
+        modalGen.$$('#main-container').appendChild(editForm);
+        modalGen.id = e.target.id;
+
+        var modalDiv = document.getElementById("modalSpace");
+        if(modalDiv.hasChildNodes()){
+          var childNodes = modalDiv.childNodes;
+          Polymer.dom(modalDiv).removeChild(childNodes[0]);  
+        }        
+        Polymer.dom(modalDiv).appendChild(modalGen);
+      },
       showSocialIcons: function(footerContent){
         if(footerContent === 'social'){
           return true;
         }else{
           return false;
         }
-      }      
+      },
+      isAboutMe: function(type){
+        if(type === 'aboutme')
+          return  true;
+        else
+          false;
+      },
+      isDetail: function(type){
+        if(type === 'details')
+          return  true;
+        else
+          false;
+      }  
     });
   </script>
 </dom-module>

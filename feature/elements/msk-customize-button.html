@@ -1,0 +1,57 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="./modal-generator.html">
+
+<dom-module id="msk-customize-button">
+    <style>
+        paper-button {
+            background-color: var(--msk-secondary-color, '#00bcd4');
+            color: #fff;
+        }
+
+        paper-button:hover {
+            background-color: var(--msk-primary-color, '#00bcd4');
+        }
+
+       
+    </style>
+    <template>
+        <div>
+            <paper-button data-dialog="modal" on-tap="customizeProfile" class="yellow-button">{{buttonTitle}}</paper-button>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'msk-customize-button',
+            ready: function () {
+
+            },
+            properties: {
+                myObj: String,
+                buttonTitle: {
+                    type: String,
+                    notify: true
+                }
+            },
+            customizeProfile: function (e) {
+
+                var modalGen = document.createElement('modal-generator');
+                modalGen.id = e.target.id;
+                modalGen.title = 'Customize My Profile';
+                modalGen.msg = 'This is the message';
+                modalGen.actionPositive = 'Update';
+                modalGen.actionNegative = 'Cancel';
+
+                var modalDiv = document.getElementById("modalSpace");
+                if(modalDiv.hasChildNodes()){
+                  var childNodes = modalDiv.childNodes;
+                  Polymer.dom(modalDiv).removeChild(childNodes[0]);  
+                }        
+                Polymer.dom(modalDiv).appendChild(modalGen);
+            }
+        });
+    </script>
+</dom-module>
+
+

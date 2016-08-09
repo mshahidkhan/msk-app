@@ -1,0 +1,188 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="./modal-generator.html">
+
+<dom-module id="msk-edit-form">
+    <style>
+        paper-button {
+          background-color: var(--msk-secondary-color, '#00bcd4');
+          color: #fff;
+        }
+
+        paper-button:hover {
+          background-color: var(--msk-primary-color, '#00bcd4');
+        }
+
+        paper-textarea{
+          color: #fafafa;
+          resize: none;
+          max-height: 50px;
+        }
+        .container{
+
+        }
+        paper-input prefix{
+          padding: 5px;
+        }
+        textarea{
+          resize: none;
+        }
+        .save-button {
+          margin-top: 50px;
+
+        }
+        .ta-about-me{
+          width: 600px;
+          height: 300px; 
+        }
+        .input-icon{
+          padding: 0px 10px 0px 10px;
+        }
+
+        .details-section > paper-input{
+          --paper-input-container-focus-color: var(--msk-primary-color);
+          --paper-input-container-input-color: var(--msk-primary-color);
+          --paper-input-prefix: {
+              color: var(--msk-primary-color);
+            } 
+        }
+
+        .social-section > paper-input{
+          --paper-input-container-focus-color: var(--msk-secondary-color);
+          --paper-input-container-input-color: var(--msk-primary-color);
+          --paper-input-prefix: {
+              color: var(--msk-secondary-color);
+            } 
+        }
+
+    </style>
+    <template>
+        <template is="dom-if" if="{{isAboutMeForm(type)}}">
+          <div>
+            <form id="aboutMeForm">
+              <div class="ta-about-me">
+                <paper-textarea value="{{aboutMe}}" label="textarea input" maxlength="500" max-rows="5"></paper-textarea>
+              </div>
+              <div class="save-button">
+                <paper-button dialog-confirm on-tap="saveForm">Save</paper-button>
+              </div>
+            </form>
+          </div>
+            <!-- <form>
+                <paper-textarea id="{{aboutmetext}}" label="autoresizing textarea input"></paper-textarea>
+            </form> -->
+        </template>
+
+        <template is="dom-if" if="{{isDetailsForm(type)}}">
+          <div>
+            <form id="detailsForm">
+            <div class="details-section" style="margin: 10px;">
+                <paper-input id="name" value="{{details.personal.name}}" label="Your Full Name" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-user"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="phone" value="{{details.personal.phone}}" label="Tring Tring">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-phone"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="email" value="{{details.personal.email}}" label="Email" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                </paper-input>
+                <paper-input id="location" value="{{details.personal.location}}" label="Location" required auto-validate error-message="needs some text!">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-map-marker"></i>
+                  </div>
+                </paper-input>
+              </div>
+
+              <div class="social-section" style="margin: 10px;">
+                <paper-input value="{{details.social.linkedin}}" id="linkedIn">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-linkedin"></i>
+                  </div>
+                </paper-input>
+                <paper-input value="{{details.social.twitter}}" id="twitter">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-twitter"></i>
+                  </div>
+                </paper-input>
+                <paper-input value="{{details.social.github}}" id="github">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-github"></i>
+                  </div>
+                </paper-input>
+                <paper-input value="{{details.social.codepen}}" id="codepen">
+                  <div class="input-icon" prefix>
+                    <i class="fa fa-codepen"></i>
+                  </div>
+                </paper-input>
+              </div>    
+            </form>
+            <div style="text-align: right; margin-top: 15px;">
+              <paper-button dialog-confirm on-tap="saveDetailsForm">Save</paper-button>
+            </div>
+          </div>
+          <div>
+            
+          </div>
+        </template>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'msk-edit-form',
+            properties: {
+                buttonTitle: {
+                    type: String,
+                    notify: true
+                },
+                type: {
+                    type: String,
+                    notify: true
+                },
+                details: {
+                  type: Object,
+                  notify: true
+                }
+            },
+            ready: function () {
+
+            },
+            attached: function () {
+              //this.aboutMe
+            },
+            saveForm: function(){
+              //this.set('aboutMe', this.aboutMe)
+              var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
+              home.set('aboutMe', this.aboutMe);
+            },            
+            isAboutMeForm: function (type) {
+                if(type === 'aboutme')
+                    return true;
+                else
+                    return false;
+            },
+            isDetailsForm: function (type) {
+                if(type === 'details')
+                    return true;
+                else
+                    return false;
+            },
+            saveDetailsForm: function(){
+              var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
+              home.set('userPersonalData.personal', this.details.personal);
+              home.set('userPersonalData.social', this.details.social);
+            }
+        });
+    </script>
+</dom-module>
+
+

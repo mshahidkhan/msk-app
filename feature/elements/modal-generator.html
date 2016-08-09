@@ -12,8 +12,9 @@
     }
   .buttons.title{
     color: white;
-    background-color: #3ea0b5;
+    background-color: var(--msk-primary-color, '#3ea0b5');
     justify-content: space-between;
+    padding: 0px 0px 0px 10px;
   }
     paper-dialog.size-position {
       position: fixed;
@@ -25,7 +26,7 @@
     }
     paper-dialog.paper-dialog-0 {
       min-width: 450px;
-      min-height: 200px;
+      min-height: 300px;
     }
     .paper-dialog-0 .buttons.footer{
       justify-content: center;
@@ -41,18 +42,18 @@
           <h3>{{title}}</h3>
           <paper-button dialog-dismiss><i class="fa fa-close"></i></paper-button>
       </div>
-      <div>
-        <signup-form loginStatus={{isLoggedIn}}></signup-form>
+      <div class="main-container" id="main-container">
       </div>
+     <!--  <div>
+        <signup-form loginStatus={{isLoggedIn}}></signup-form>
+      </div> -->
       
-      <template is="dom-if" if="{{actionPositive}}">
+      <!-- <template is="dom-if" if="{{actionPositive}}">
         <div class="buttons footer">
           <paper-button raised dialog-dismiss class="button-cancel" hidden$="{{!actionNegative}}">{{actionNegative}}</paper-button>
           <paper-button raised dialog-confirm autofocus on-click="handleTap" class="special"  hidden$="{{!actionPositive}}">{{actionPositive}}</paper-button>        
       </div>
-      </template>
-      
-      
+      </template> -->
     </paper-dialog>
   </template>  
 </dom-module>
@@ -74,12 +75,20 @@
       },
       actionNegative:{
         type: String
+      },
+      myContent: {
+        type: Object,
+        notify: true
       }
     },
     ready: function(){ 
       console.log("Modal Generator - isLoggedIn : "+this.isLoggedIn);
     },
     attached: function(){
+
+     /* Polymer.dom(this.$.mainContainer).appendChild(this.mainContent);
+      //this.myContent = this.mainContent;*/
+
       var dialog = this.$$('paper-dialog');
       dialog.toggle();
     },
