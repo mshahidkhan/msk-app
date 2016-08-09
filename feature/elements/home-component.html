@@ -13,6 +13,16 @@
 <dom-module id="home-component">
    
   <style is="custom-style">
+   :root{
+      --msk-primary-color:  #00bcd4;
+      --msk-secondary-color: #ff4081;
+      --msk-tertiary-color: #fafafa;
+      --msk-disabled-color: #ff4081;
+      --msk-background-color: #ff4081;
+      --msk-text-primary-color: #fff;
+      --msk-text-secondary-color: #000;
+      --msk-text-special-color: #727272;
+    };
     body {
       margin: 0;
       font-family: 'Roboto', 'Noto', sans-serif;
@@ -44,7 +54,7 @@
     .spacer {
       @apply(--layout-flex);
     }
-    #router_mount {
+    #home {
       display: block;
       padding: 700px 0px 40px 0px;
       
@@ -54,16 +64,14 @@
         left: 85px;
       }
 
-      #router_mount {
-        padding-top: 600px;
-      }
+      
     }
   </style>
   <template>
     <!--<header-main></header-main>-->
     <!--<header-profile></header-profile>-->
     <div id="mskHeaderArea"></div>
-    <div id="router_mount">
+    <div id="home">
       <msk-home></msk-home>
     </div>
     <div id="modalSpace"></div>

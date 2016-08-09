@@ -16,6 +16,8 @@
 <link rel="import" href="./msk-experience.html">
 <link rel="import" href="./msk-education.html">
 <link rel="import" href="./home-about-me.html">
+<link rel="import" href="./msk-customize-button.html">
+
 <dom-module id="msk-home">
     <template>
       <style include="shared-styles">
@@ -31,8 +33,17 @@
         --msk-text-primary-color: #fff;
         --msk-text-secondary-color: #000;
         --msk-text-special-color: #727272;
-      }
-        
+      };
+      :root{
+         --msk-primary-color:  #00bcd4;
+        --msk-secondary-color: #ff4081;
+        --msk-tertiary-color: #fafafa;
+        --msk-disabled-color: #ff4081;
+        --msk-background-color: #ff4081;
+        --msk-text-primary-color: #fff;
+        --msk-text-secondary-color: #000;
+        --msk-text-special-color: #727272;
+      };
       .msk-title {
           border-bottom: 1px solid #e1e2e5;
       }
@@ -199,6 +210,7 @@
         }
       }
     </style>
+      <div id="modalSpace"></div>
       <paper-toast id="toast1" class="capsule" horizontal-align="right" duration="0" text="">
         <div>
           <span>Choose primary color -</span>
@@ -237,17 +249,17 @@
         <!-- <div class="flex-center-justified section-two-head"> -->
           <div class="flexchild center-me">
             <msk-user-avatar type="main"></msk-user-avatar>
+            <paper-button on-tap="editEnable" class="yellow-button">Edit Enable</paper-button>
+            <!-- <msk-customize-button button-title="Make My Profile"></msk-customize-button> -->
           </div>
       </div>
       <div class="flex-center-justified section-two">  
-          <div class="about-me">
-            <home-about-me title-me="About Me" footer-content="button">
-              <div>{{aboutMe}}</div>
-              <div>{{aboutMePara2}}</div>
+          <div class="about-me" style="margin-right: 4vw;">
+            <home-about-me title-me="About Me" type="aboutme" about-me="{{aboutMe}}" footer-content="button" edit-enabled={{editEnabled}} >
             </home-about-me>
           </div>          
           <div class="my-details center">
-            <home-about-me title-me="Personal Details" footer-content="social">
+            <home-about-me title-me="Personal Details" type="details" details-data={{userPersonalData}} footer-content="social" edit-enabled={{editEnabled}}>
               <home-personal-info data={{userPersonalData}}></home-personal-info>
             </home-about-me>
           </div>
@@ -287,6 +299,15 @@
         Polymer({
             is: "msk-home",
             properties: {
+              editEnabled: {
+                type: Boolean,
+                notify: true,
+                value: false
+              },
+              aboutMe: {
+                type: String,
+                notify: true  
+              }
               
             },
             ready: function () {
@@ -301,6 +322,9 @@
             },
           populateData: function(e){
               console.log(e.target.id);
+          },
+          editEnable: function(e){
+            this.editEnabled = !this.editEnabled;
           },
           handleTap: function (e){
             var modalGen = document.createElement('modal-generator');
@@ -329,6 +353,9 @@
             //console.log('Selected Color :'+color);
             this.customStyle['--msk-secondary-color'] = e.target.id;
             this.updateStyles();
+          },
+          customizeProfile: function(){
+            console.log("Customize Profile");
           }         
         });
     </script>
