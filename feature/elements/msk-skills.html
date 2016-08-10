@@ -51,8 +51,7 @@
     </div>
 
     <template is="dom-repeat" items="{{skillsArray}}">
-      <msk-card 
-        card-data= {{getCardDataObject(item)}} ></msk-card>
+      <msk-card card-data= {{getCardDataObject(item)}} ></msk-card>
     </template>
   </template>
   <script>
@@ -77,7 +76,7 @@
             return {
               'entry': {
                 name: 'scale-up-animation',
-                node: this //or this.$.child
+                node: this //for child elements, user -> this.$.child
               }
             }
           }
@@ -138,6 +137,8 @@
               skill: [
                 {tech:'Java', value: '70'}, 
                 {tech:'Node', value: '70'}, 
+                {tech:'Express', value: '50'}, 
+                {tech:'Node', value: '70'}, 
                 {tech:'Express', value: '50'}
               ],
               icon: '',
@@ -148,17 +149,9 @@
               skill: [
                 {tech:'Gulp', value: '40'}, 
                 {tech:'Bower', value: '50'}, 
+                {tech:'Git', value: '60'}, 
+                {tech:'Bower', value: '50'}, 
                 {tech:'Git', value: '60'}],
-              icon: '',
-              proficiency: 'Intermediate' 
-            },
-            {
-              type: 'TDD/BDD',
-              skill: [
-                 {tech:'WebComponent Tester', value: '60'},
-                {tech:'Chai', value: '50'}, 
-                {tech:'Jasmine', value: '50'}, 
-                {tech:'Sinon', value: '50'}],
               icon: '',
               proficiency: 'Intermediate' 
             }

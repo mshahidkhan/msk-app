@@ -34,16 +34,7 @@
         --msk-text-secondary-color: #000;
         --msk-text-special-color: #727272;
       };
-      :root{
-         --msk-primary-color:  #00bcd4;
-        --msk-secondary-color: #ff4081;
-        --msk-tertiary-color: #fafafa;
-        --msk-disabled-color: #ff4081;
-        --msk-background-color: #ff4081;
-        --msk-text-primary-color: #fff;
-        --msk-text-secondary-color: #000;
-        --msk-text-special-color: #727272;
-      };
+      
       .msk-title {
           border-bottom: 1px solid #e1e2e5;
       }
@@ -234,7 +225,7 @@
             <a on-tap="selectColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="#799CAC"></a>  
           </div>
         </div> 
-        <div>
+        <!-- <div>
           <span>Choose Secondary color -</span>
           <div class="flex-horizontal-with-ratios">
             <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" id="1#00bcd4"></a>
@@ -245,9 +236,10 @@
             <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" id="1#EAB82E"></a>
             <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" id="1#799CAC"></a>  
           </div>
-        </div>
+        </div> -->
         <paper-button onclick="toast1.toggle()" class="yellow-button">Close</paper-button>
       </paper-toast>
+
       <paper-fab icon="settings" title="Settings" onclick="toast1.open()"></paper-fab>
       
 
@@ -255,7 +247,7 @@
         <!-- <div class="flex-center-justified section-two-head"> -->
           <div class="flexchild center-me">
             <msk-user-avatar type="main"></msk-user-avatar>
-            <paper-button on-tap="editEnable" class="yellow-button">Edit Enable</paper-button>
+            <paper-button on-tap="editEnable" class="yellow-button">Edit Mode</paper-button>
             <!-- <msk-customize-button button-title="Make My Profile"></msk-customize-button> -->
           </div>
       </div>
