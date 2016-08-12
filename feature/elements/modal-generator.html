@@ -35,6 +35,16 @@
       min-width: 15.14em;
       font-size: large;
     }
+    @media (max-width: 639px) {
+      paper-dialog{
+        max-width: 400px;  
+      }
+      paper-dialog.paper-dialog-0 {
+        min-width: 200px;
+        min-height: 300px;
+      }
+
+    }
   </style>
   <template>
     <paper-dialog role="dialog" modal nocancelonoutsideclick="true">
