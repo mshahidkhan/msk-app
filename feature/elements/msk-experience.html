@@ -18,10 +18,21 @@
         padding-right: 10px;
       }
       .card-item{
-        margin-top: 15px;
+        margin-top: 10px;
+      }
+      .company{
+        margin-bottom: 5px;
+        font-size: 18px;
+        color: var(--msk-primary-color);
+      }
+      .client{
+        margin-top: 10px;
+        font-size: 14px;
+        color: var(--msk-secondary-color);  
+
       }
       paper-card{
-        width: 22em;
+        width: 24em;
         margin-right: 25px;
         margin-bottom: 10px;
         border: 2px solid  transparent;
@@ -46,15 +57,15 @@
     <template is="dom-repeat" items="{{experienceArray}}">
         <paper-card heading="{{item.startDate}}-{{item.endDate}}" elevation="4">
           <div class="card-content ">
-            <div class="card-item">
+            <div class="card-item company">
               <span class="icon-span"><i class="fa fa-briefcase"></i></span>
               <span>{{item.company}}</span>
             </div>
-            <div class="card-item">
+            <div class="card-item role">
               <span class="icon-span"><i class="fa fa-user"></i></span>
               <span>{{item.role}}</span>
             </div>
-            <div class="card-item">
+            <div class="card-item client">
               <span class="icon-span"><i class="fa fa-users"></i></span>
               <span>{{item.clients}}</span>
             </div>

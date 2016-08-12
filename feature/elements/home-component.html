@@ -13,21 +13,20 @@
 <dom-module id="home-component">
    
   <style is="custom-style">
-   :root{
-      --msk-primary-color:  #00bcd4;
-      --msk-secondary-color: #ff4081;
-      --msk-tertiary-color: #fafafa;
-      --msk-disabled-color: #ff4081;
-      --msk-background-color: #ff4081;
-      --msk-text-primary-color: #fff;
-      --msk-text-secondary-color: #000;
-      --msk-text-special-color: #727272;
-    };
-    body {
-      margin: 0;
-      font-family: 'Roboto', 'Noto', sans-serif;
-      background-color: #eee;
-    }
+    :host{
+        font-size: 16px !important;
+        padding-right: 50px;
+        padding-left: 50px;
+        --msk-primary-color:  #00bcd4;
+        --msk-secondary-color: #ff4081;
+        
+        --msk-tertiary-color: #fafafa;
+        --msk-disabled-color: #ff4081;
+        --msk-background-color: #ff4081;
+        --msk-text-primary-color: #fff;
+        --msk-text-secondary-color: #000;
+        --msk-text-special-color: #727272;
+      };
    
     .avatar {
       height: 40px;
@@ -121,7 +120,6 @@
             Polymer.dom(headerDiv).removeChild(childNodes[0]);
           }
           Polymer.dom(headerDiv).appendChild(homeEle);
-          console.log("Logged In");
         }else{
           var headerDiv = Polymer.dom(this.root).querySelector('#mskHeaderArea');
           var homeEle =document.createElement('header-main');
@@ -131,7 +129,6 @@
             Polymer.dom(headerDiv).removeChild(childNodes[0]);
           }
           Polymer.dom(headerDiv).appendChild(homeEle);
-          console.log("User is not logged in yet");
         }
       }
     })
