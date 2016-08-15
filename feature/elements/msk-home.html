@@ -42,7 +42,7 @@
       .section-two-head{
         font-family: 'OpenSans';
         font-size: 32px;
-        padding: 25px;
+        padding: 15px;
       }
       .section-two-subhead{
         font-family: 'Titillium';
@@ -69,7 +69,7 @@
       .section-three-head{
         font-family: 'Mirza';
         font-size: 48px;
-        padding: 25px;
+        padding: 15px;
       }
       .section-three-subhead{
         font-family: 'DancingScript';
@@ -116,21 +116,6 @@
         margin-bottom: 12px;
         border-bottom: 1px solid rgb(238, 238, 238);
       }
-      .me{
-        font-family: 'Katibeh';
-        font-size: 48px;
-        color: #fff;
-      }
-      .me2{
-        font-family: 'Roboto';
-        font-size: 32px;
-        color: #fff;
-      }
-      .me3{
-        font-family: 'Roboto';
-        font-size: 24px;
-        color: #fff;
-      }
       .fab-settings {
         margin-left: 10px;
         margin-right: 10px;
@@ -174,16 +159,21 @@
         @apply(--layout-around-justified);
       }  
       .about-me{
-        min-width: 45%;
+        width: 35%;
+      }
+      .my-hightlights{
+        width: 30%;
       }
       .my-details{
-        min-width: 45%;
+        width: 30%;
       }
-      .toast-close{
-        min-width: 25px;
-      }
+      
 
-      @media (max-width: 639px) {
+      @media (max-width: 768px) {
+        paper-fab{
+          height: 40px;
+          width: 40px;
+        }
         .fab-settings {
           bottom: 10px; 
           right: 0px;
@@ -193,13 +183,18 @@
           right: 0px;
         }
          .about-me{
-          min-width: 75%;
+          width: 100%;
         }
         .my-details{
-          min-width: 75%;
+          width: 100%;
+        }
+        .my-hightlights{
+          width: 100%;
         }
         .home-details-section{
           flex-direction: column;
+          justify-content: center;
+
         }
         .section-four-subhead{
           font-size: 10px;
@@ -218,20 +213,21 @@
       <div class="flex-wrap section-two">  
           <div class="flexchild center-me">
             <msk-user-avatar type="main"></msk-user-avatar>
-<!--             <paper-button on-tap="editEnable">Edit Mode</paper-button> -->
           </div>
       </div>
       <div class="flex-center-justified section-two home-details-section">  
-          <div class="about-me" style="margin-right: 4vw;">
-            <home-about-me title-me="About Me" type="aboutme" about-me="{{aboutMe}}" footer-content="button" edit-enabled={{editEnabled}} >
+          <div class="about-me">
+            <home-about-me title-me="About Me" type="aboutme" about-me="{{aboutMe}}" about-me-two={{aboutMeTwo}} footer-content="button" edit-enabled={{editEnabled}} >
+            </home-about-me>
+          </div>
+          <div class="my-hightlights center">
+            <home-about-me title-me="Highlights" type="myhighlights" my-hightlight="{{aboutMe}}" edit-enabled={{editEnabled}} >
             </home-about-me>
           </div>          
           <div class="my-details center">
             <home-about-me title-me="Personal Details" type="details" details-data={{userPersonalData}} footer-content="social" edit-enabled={{editEnabled}}>
-              
             </home-about-me>
           </div>
-        <!-- </div> -->
       </div>
       <div class="section-skills">
         <div class="flex-center-justified section-three-head">
@@ -250,16 +246,11 @@
         </div>
       </div>
       <div class="section-footer">        
-        <div class="flex-center-justified section-four-head center-me">
-          <div style="width:25% "></div>
-          
-          <div style="width:25% "></div>
-        </div>
-        <div class="flex-center-justified section-four-subhead center-me">
-            <div style="width:25% "></div>
-            Copyright (c) 2016, - www.khanshahid.com
-            <div style="width:25% "></div>
+        <div class="home-details-section section-four-subhead center-me footer">
+          <div>This site is built with Google Polymer, Javascript, CSS, HTML5. Frameworks/Libraries, Images, fonts and design used in this project are either Open Source/Free or my personal property.</div>
+          <div>If any element of my design/code matches with your personal/proprietary element and/or happen to be personal, please contact me in such case and I will clarify or make amendment accordingly.</div>    
         </div>      
+        <div style="color: darkgray;"><i class="fa fa-copyright"></i> Copyright - 2016 - www.khanshahid.com</div>    
       </div>
     </template>
   
@@ -289,7 +280,7 @@
                   social: {
                     linkedin: 'http://www.linkedin.com/in/mohammed-shahid-khan' ,
                     twitter: 'https://twitter.com/sh_a_hid',
-                    github: 'https://github.com/mshahidkhan',
+                    github: 'https://github.com',
                     codepen: 'https://codepen.io/khanshahid'
                   }
                 }
@@ -297,13 +288,9 @@
               
             },
             ready: function () {
-              this.aboutMe = "I’m a Web Developer. I have been developing Web applications & Portals with strong Frontend and Backend experience for over 10 years now. I am currently working for GE Oil & Gas in Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. ";
-              this.aboutMePara2 = "Before falling in love with Frontend Development, I worked with Java/Java EE, Middleware and different databases.";
+              this.aboutMe = "I’m a Web Application Developer. I have been developing Web applications & Portals with strong Frontend, Middleware and Backend experience for over 10 years. I am currently working for GE Oil & Gas in Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. ";
+              this.aboutMeTwo = "Before falling in love with Frontend Development, I worked with Java/Java EE, Middleware and different databases.";
               this.experienceTitle = "Experience";
-
-
-              this.headlineOne = ' Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.';
-              this.subheadOne= " Hello, I’m a UI & Front End Developer from Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. I have been working on Web applications/Portals and developing Frontend, Middleware and Backend for over 10 years now.";
               this.userPersonalData = {
                 personal: {
                   name: 'Mohammed Shahid Khan', 
@@ -339,18 +326,7 @@
             }        
             Polymer.dom(modalDiv).appendChild(modalGen);
           },
-          selectColor: function(e,color) {
-            
-            this.customStyle['--msk-primary-color'] = e.target.id;
-            this.updateStyles();
-          },
           
-          selectSecondaryColor: function(e,color) {
-            //var color="";
-            //console.log('Selected Color :'+color);
-            this.customStyle['--msk-secondary-color'] = e.target.id.substring(1);
-            this.updateStyles();
-          },
           customizeProfile: function(){
             console.log("Customize Profile");
           }         
@@ -366,15 +342,25 @@
         width: 25px;
         border:1px transparent;
       } 
+      paper-button.toast-close{
+        min-width: 15px;
+        width: 15px;
+        float:right;
+      }
+
     </style>
 
         <div>
-          <span>Choose primary color -</span>
-          <span style="float:right; text-align: right;">
+          <div>
             <paper-button onclick="toast1.toggle()" class="toast-close">
               <i class="fa fa-close"></i>
             </paper-button>
+          <div>
+          <div class="flex-horizontal-with-ratios">
+          <span>Choose primary color -</span>
+            
           </span>
+          </div>
           <div class="flex-horizontal-with-ratios">
             <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
             <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>

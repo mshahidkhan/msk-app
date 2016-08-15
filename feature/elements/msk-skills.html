@@ -45,6 +45,15 @@
         @apply(--layout-wrap);
         width: 200px;
       }
+      msk-card{
+        vertical-align: top;
+      }
+      @media (max-width: 639px) {
+        :host{
+          justify-content: center;
+          text-align: center;
+        };
+      }
     </style>
     <div class="title">
       {{title}}
@@ -113,7 +122,7 @@
                 {tech:'Polymer', value: '60'}, 
                 {tech:'WebComponents', value: '60'}, 
                 {tech:'Angular', value: '70'},
-                {tech:'Angular 2', value: '50'},
+                {tech:'Angular 2', value: '40'},
                 {tech:'React', value: '30'}
               ],
               icon: '',
@@ -125,7 +134,7 @@
               skill: [
                 {tech:'Javascript', value: '70'}, 
                 {tech:'HTML5', value: '70'}, 
-                {tech:'CSS', value: '50'},
+                {tech:'CSS/Less', value: '50'},
                 {tech:'Material Design', value: '60'},
                 {tech:'Bootstrap', value: '60'}
               ],
@@ -138,8 +147,8 @@
                 {tech:'Java', value: '70'}, 
                 {tech:'Node', value: '70'}, 
                 {tech:'Express', value: '50'}, 
-                {tech:'Node', value: '70'}, 
-                {tech:'Express', value: '50'}
+                {tech:'Spring', value: '70'}, 
+                {tech:'Database', value: '50'}
               ],
               icon: '',
               proficiency: 'Advance' 
@@ -148,8 +157,6 @@
               type: 'Tools',
               skill: [
                 {tech:'Gulp', value: '40'}, 
-                {tech:'Bower', value: '50'}, 
-                {tech:'Git', value: '60'}, 
                 {tech:'Bower', value: '50'}, 
                 {tech:'Git', value: '60'}],
               icon: '',

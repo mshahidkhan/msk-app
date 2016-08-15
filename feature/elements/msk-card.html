@@ -26,6 +26,8 @@
         margin-top: 10px;
       }
       paper-card{
+        text-align: left;
+        vertical-align: top;
         width: 22em;
         height: 24em; 
         margin-right: 25px;
@@ -60,7 +62,7 @@
         --paper-progress-transition-timing-function: ease;
         --paper-progress-transition-transition-delay: 0s;
       }
-      .Advance
+      
     </style>
     <template>
       <paper-card heading="{{cardData.type}}" elevation="2" animated id="{{cardData.type}}">
@@ -118,11 +120,11 @@
         }
       },  
       ready: function(){
-        console.log("MSK Card Ready" + this.cardData);
+        //console.log("MSK Card Ready" + this.cardData);
         this.playAnimation('entry');
       },
       attached: function(){
-        console.log("MSK Card" + this.cardData);
+        //console.log("MSK Card" + this.cardData);
         
       },
       detached: function(){

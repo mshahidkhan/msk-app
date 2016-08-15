@@ -92,7 +92,6 @@
       }
     },
     ready: function(){ 
-      console.log("Modal Generator - isLoggedIn : "+this.isLoggedIn);
     },
     attached: function(){
 
@@ -103,7 +102,6 @@
       dialog.toggle();
     },
     handleTap: function (){
-      console.log('Modal Action!');
       
     }
 });
@@ -183,8 +181,6 @@
       },
       handleTap: function() { 
         this.set("isLoggedIn", true);
-        console.log("Login clicked!");
-        //Router.go('profile');
       }
     })
   </script>

@@ -57,6 +57,12 @@
       .card-item > i{
         text-align: center;
       }
+      @media (max-width: 639px) {
+        :host{
+          justify-content: center;
+          text-align: center;
+        };
+      }
     </style>
     <div class="title">
       {{title}}
@@ -111,16 +117,19 @@
         this.educationArray = 
           [
             {
-              timeline: '2003-2006',
+              timeline: '2006',
               degree: 'Masters of Computer Application',
-              institute: 'NIT/REC, Bhopal, India',
-              proficiency: 'Intermediate'
+              institute: 'NIT/REC, Bhopal, India'
             },
             {
-              timeline: '1999-2003 ',
+              timeline: '2003',
               degree: 'Bachelor of Science',
-              institute: 'DAVV, Indore, India',
-              proficiency: 'Intermediate' 
+              institute: 'DAVV, Indore, India'
+            },
+            {
+              timeline: '1999',
+              degree: 'School',
+              institute: 'MP Board, Ratlam, India'
             }
           ];
 

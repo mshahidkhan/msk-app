@@ -13,7 +13,8 @@
       :host{
         font-family: 'Titillium';
         font-size: 16px;
-        height: 250px;
+        margin: 5px;
+        height: 350px;
       }
       hr.horizontal-line {
         border: 0;
@@ -22,9 +23,9 @@
         margin: 20px 0px 0px 0px;
       }
       .title{
-        font-family: 'Mirza';
         font-size: 24px;
         color: var(--msk-primary-color);
+        text-align: center;
       }
       .card-content{
         font-family: 'Titillium';
@@ -60,17 +61,27 @@
         font-size: 24px;
         font-weight: 400;
         color: var(--msk-primary-color);
+        text-align: center;
       }
       .card-content{
-        height: 200px;
+        height: 75%;
       }
       .card-actions{
-        max-height: 4vw ;
+        height: 75px;
+        padding: 0px;
       }
       .social-icons{
         height: 50px;
       }
-      
+      @media (max-width: 639px) {
+        paper-card{
+          height: 370px;
+        }
+        .card-actions{
+          padding: 0px;
+          height: 75px ;
+        }        
+      }
     </style>
     <template>
     <!-- <div class="flex-horizontal"> -->
@@ -80,23 +91,29 @@
 
         <div class="card-content">
           <div class="heading">
-            <span>{{titleMe}}</span>
+            <span class="title">{{titleMe}}</span>
             <template is="dom-if" if="{{editEnabled}}">
               <span style="float: right; "><paper-button on-tap="editMe" type={{type}} style="min-width: 25px; padding: 0px;">
                 <i class="fa fa-pencil" type={{type}}></i></paper-button> </span>
             </template>
           </div>   
           <template is="dom-if" if="{{isAboutMe(type)}}">       
-            <div>{{aboutMe2}}</div>
             <div>{{aboutMe}}</div>
+            <div>{{aboutMeTwo}}</div>
           </template>
-           <template is="dom-if" if="{{isDetail(type)}}">       
+          
+          <template is="dom-if" if="{{isDetail(type)}}">       
             <msk-personal-info data={{detailsData}}></msk-personal-info>
           </template>
+          
+          <template is="dom-if" if="{{isMyHighlight(type)}}">       
+            <msk-highlights></msk-highlights>
+          </template>
         </div>
+
         <div class="card-actions">
           <template is="dom-if" if="{{isResumeButton(footerContent)}}">
-            <paper-button elevation="2">Download My Resume</paper-button>
+            <!-- <paper-button elevation="2">Download My Resume</paper-button>   -->
           </template>
           <template is="dom-if" if="{{showSocialIcons(footerContent)}}">
             <div class="flex-horizontal-with-ratios social-icons" >
@@ -161,7 +178,8 @@
         var editForm = document.createElement('msk-edit-form');
         editForm.type = e.target.type;
         if(e.target.type === 'aboutme'){
-          editForm.aboutMe = this.aboutMe;  
+          editForm.aboutMe = this.aboutMe;
+          editForm.aboutMeTwo = this.aboutMeTwo;  
         }else if(e.target.type === 'details'){
           editForm.details = this.detailsData;
         }
@@ -194,7 +212,13 @@
           return  true;
         else
           false;
-      }  
+      },
+      isMyHighlight: function(type){
+        if(type === 'myhighlights')
+          return  true;
+        else
+          false;
+      }
     });
   </script>
 </dom-module>
