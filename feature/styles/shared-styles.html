@@ -50,7 +50,7 @@
             /* Your local CSS File */
             @font-face {
                 font-family: 'Lato';
-                src: local('Lato Bold'), local('Lato-Bold'), url(./css/fonts/lato/lato-Bold.ttf) format('truetype');
+                src: local('Lato Bold'), local('Lato-Bold'), url(./css/fonts/lato/Lato-Bold.ttf) format('truetype');
             }
            @font-face {
                 font-family: 'OpenSans';
@@ -165,6 +165,9 @@
             /* Iron-Flex Layout for form */
             .flex-horizontal-with-ratios {
             @apply(--layout-horizontal);
+            }
+            .flex-vertical {
+              @apply(--layout-vertical);
             }
             .flexchild {
             @apply(--layout-flex);

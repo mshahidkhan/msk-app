@@ -7,7 +7,7 @@
 <link rel="import" href="./modal-generator.html">
 
 <dom-module id="msk-edit-form">
-    <style>
+    <style is="custom-style" include="shared-styles">
         paper-button {
           background-color: var(--msk-secondary-color, '#00bcd4');
           color: #fff;
@@ -20,7 +20,7 @@
         paper-textarea{
           color: #fafafa;
           resize: none;
-          max-height: 50px;
+          max-height: 40px;
         }
         .container{
 
@@ -37,7 +37,7 @@
         }
         .ta-about-me{
           width: 600px;
-          height: 300px; 
+          height: 400px; 
         }
         .input-icon{
           padding: 0px 10px 0px 10px;
@@ -61,7 +61,7 @@
         @media (max-width: 639px) {
          .ta-about-me{
             width: 300px;
-            height: 300px; 
+            height: 400px; 
           } 
         }
 
@@ -70,8 +70,13 @@
         <template is="dom-if" if="{{isAboutMeForm(type)}}">
           <div>
             <form id="aboutMeForm">
-              <div class="ta-about-me">
-                <paper-textarea value="{{aboutMe}}" label="textarea input" maxlength="500" max-rows="5"></paper-textarea>
+              <div class="flex-vertical ta-about-me">
+                <div class="flex2child">
+                <paper-textarea value="{{aboutMe}}" label="Professional" maxlength="350" max-rows="4"></paper-textarea>
+                </div>
+                <div class="flexchild">
+                <paper-textarea value="{{aboutMeTwo}}" label="General" maxlength="200" max-rows="4"></paper-textarea>
+                </div>
               </div>
               <div class="save-button">
                 <paper-button dialog-confirm on-tap="saveForm">Save</paper-button>
@@ -169,6 +174,7 @@
               //this.set('aboutMe', this.aboutMe)
               var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
               home.set('aboutMe', this.aboutMe);
+              home.set('aboutMeTwo', this.aboutMeTwo);
             },            
             isAboutMeForm: function (type) {
                 if(type === 'aboutme')
