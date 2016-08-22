@@ -6,6 +6,7 @@
 
 <link rel="import" href="./msk-edit-form.html">
 <link rel="import" href="./msk-personal-info.html">
+<link rel="import" href="./msk-highlights.html">
 
 <dom-module id="home-about-me">
   
@@ -107,14 +108,13 @@
           </template>
           
           <template is="dom-if" if="{{isMyHighlight(type)}}">       
-            <msk-highlights></msk-highlights>
+            <msk-highlights id="highlights" highlights-data={{highlightsData}} ></msk-highlights>
           </template>
         </div>
-
         <div class="card-actions">
-          <template is="dom-if" if="{{isResumeButton(footerContent)}}">
-            <!-- <paper-button elevation="2">Download My Resume</paper-button>   -->
-          </template>
+          <!--<template is="dom-if" if="{{isResumeButton(footerContent)}}">
+             <paper-button elevation="2">Download My Resume</paper-button>   
+          </template> -->
           <template is="dom-if" if="{{showSocialIcons(footerContent)}}">
             <div class="flex-horizontal-with-ratios social-icons" >
               <paper-item raised>
@@ -160,7 +160,19 @@
         detailsData: {
           type: Object,
           notify: true
+        },
+        highData: {
+          type: Array,
+          notify: true,
+          value: []
         }
+      },
+      _highlightsDataChanged: function(newObj, oldObj){
+        console.log("highlightsData Data Changed ");
+        if(newObj){
+          //this.set('highlightsData', newObj);  
+        }
+        
       },
       attached: function(){
         //this.details = this.detailsData;
@@ -180,14 +192,19 @@
         if(e.target.type === 'aboutme'){
           editForm.aboutMe = this.aboutMe;
           editForm.aboutMeTwo = this.aboutMeTwo;  
+          modalGen.title = "Edit About Me";
         }else if(e.target.type === 'details'){
           editForm.details = this.detailsData;
+          modalGen.title = "Edit Personal Details";
+        }else if(e.target.type === 'highlights'){
+          editForm.highlights = this.highlightsData;
+          modalGen.title = "Edit Highlights";
         }
         
         modalGen.$$('#main-container').appendChild(editForm);
         modalGen.id = e.target.id;
 
-        var modalDiv = document.getElementById("modalSpace");
+        var modalDiv = document.querySelector("#modalSpace");
         if(modalDiv.hasChildNodes()){
           var childNodes = modalDiv.childNodes;
           Polymer.dom(modalDiv).removeChild(childNodes[0]);  
@@ -214,7 +231,7 @@
           false;
       },
       isMyHighlight: function(type){
-        if(type === 'myhighlights')
+        if(type === 'highlights')
           return  true;
         else
           false;
