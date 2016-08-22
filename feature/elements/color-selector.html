@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module is="color-selector">
+  <template>
+    <style include="shared-styles">
+      .color-selection-bar{
+        height: 25px;
+        width: 25px;
+        border:1px transparent;
+      } 
+      paper-button.toast-close{
+        min-width: 15px;
+        width: 15px;
+        float:right;
+      }
+
+    </style>
+
+        <div>
+          <div>
+            <paper-button onclick="toast1.toggle()" class="toast-close">
+              <i class="fa fa-close"></i>
+            </paper-button>
+          <div>
+          <div class="flex-horizontal-with-ratios">
+          <span>Choose primary color -</span>
+            
+          </span>
+          </div>
+          <div class="flex-horizontal-with-ratios">
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
+            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
+          </div>
+        </div> 
+        <div>
+          <span>Choose Secondary color -</span>
+          <div class="flex-horizontal-with-ratios">
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
+            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
+          </div>
+        </div>
+        <paper-button on-tap="saveColorSelection" class="yellow-button">Save</paper-button>
+        <paper-button onclick="toast1.toggle()" class="yellow-button">Close</paper-button>
+  </template>
+  <script>
+    Polymer({
+      is: "color-selector",
+      properties: {
+
+      },
+      ready: function(){
+
+      },
+      attached: function(){
+        this.colorSelection = {primary: '#00bcd4', secondary: '#ff4081'};
+      },
+      saveColorSelection: function(e){
+        //this.colorSelection.primary =
+        if(this.colorSelection.primary !== ''){
+          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-primary-color"] = this.colorSelection.primary;   
+        } 
+        if(this.colorSelection.secondary !== ''){
+          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-secondary-color"] = this.colorSelection.secondary;
+        }
+        Polymer.updateStyles();
+      },
+      selectPrimaryColor: function(e){
+        console.log('Primary Color Selection');
+        this.colorSelection.primary = e.target.getAttribute('color');
+        //this.parentElement.parentElement.customStyle["--msk-primary-color"] = e.target.getAttribute('color');
+        //this.parentElement.parentElement.updateStyles();
+      },
+      selectSecondaryColor: function(e){ 
+
+        console.log('Secondary Color Selection'+ e.target.getAttribute('color'));
+        this.colorSelection.secondary = e.target.getAttribute('color');
+        //this.parentElement.parentElement.customStyle["--msk-secondary-color"] = e.target.getAttribute('color');
+        //this.parentElement.parentElement.updateStyles();
+      }
+    })
+  </script>
+</dom-module>

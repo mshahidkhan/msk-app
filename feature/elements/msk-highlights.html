@@ -1,0 +1,97 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="msk-highlights">
+  <template>
+    <style is="custom-style" include="shared-styles">
+      :host{
+        font-family: 'Titillium';
+        font-size: 16px !important;        
+      }
+      .my-div{
+        color: rgb(114, 114, 114);
+        margin: 10px 10px 15px 10px;
+        border-bottom: 1px solid rgb(238, 238, 238);
+      }
+      i{
+       color: var(--msk-secondary-color); 
+      }
+      .hightlight{
+        color: var(--msk-secondary-color);
+        font-size: 18px;
+      }
+      .unit{
+        font-size: 12px;
+      }
+      .my-highlight{
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+      }
+      .flex-wrap {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        max-width: 450px;
+        width: 100%;
+      }
+      @media (max-width: 768px){
+        .flex-wrap{
+          max-width: 450px;
+          width: 100%;
+        }
+        .hightlight{
+          color: var(--msk-secondary-color);
+          font-size: 14px;
+        }
+        .my-highlight{
+          border: .5px solid darkgray;
+          border-radius: 5px;
+          margin: 5px;
+          padding: 5px;
+          text-align: center;
+        } 
+        .text{
+          font-size: 12px;
+        }
+      }
+    </style>
+
+    <div class="flex-wrap">
+      <template is="dom-repeat" id="repeater" items="{{hData}}">
+        <div class="my-highlight">
+          <div class="hightlight center">{{item.highlight}}<span class="unit">{{item.unit}}</span></div>
+          <div class="center"><span class="text">{{item.text}}</span></div>
+        </div>        
+      </template>
+    </div> 
+  </template>
+  <script>
+    Polymer({
+      is: 'msk-highlights',
+      properties: {
+        title: {
+          type: String,
+          notify: true,
+          value: 'My Highlights'
+        },
+        hData: {
+          type: Array,
+          notify: true,
+          observer: 'dataChanged'
+        }
+      },
+      dataChanged: function(newObj, oldObj){
+        console.log("dataChanged");
+
+       /* this.set('hData', highlightsData);*/
+        //this.notifyPath('highlightsData.hightlight', hData.hightlight);
+        //return highlightsData;
+        
+      },
+      attached: function(){
+        console.log("Highlights", this.hData);
+        this.set('hData', this.highlightsData);
+      }
+    });
+  </script>
+</dom-module>

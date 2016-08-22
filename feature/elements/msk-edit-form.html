@@ -8,6 +8,9 @@
 
 <dom-module id="msk-edit-form">
     <style is="custom-style" include="shared-styles">
+      :host{
+        font-family: 'Titillium';
+      }
         paper-button {
           background-color: var(--msk-secondary-color, '#00bcd4');
           color: #fff;
@@ -22,9 +25,6 @@
           resize: none;
           max-height: 40px;
         }
-        .container{
-
-        }
         paper-input prefix{
           padding: 5px;
         }
@@ -33,7 +33,6 @@
         }
         .save-button {
           margin-top: 50px;
-
         }
         .ta-about-me{
           width: 600px;
@@ -58,15 +57,19 @@
               color: var(--msk-secondary-color);
             } 
         }
+        .high-child{
+          margin: 5px;
+        }
         @media (max-width: 639px) {
          .ta-about-me{
-            width: 300px;
+            width: 400px;
             height: 400px; 
-          } 
+          }
         }
 
     </style>
     <template>
+
         <template is="dom-if" if="{{isAboutMeForm(type)}}">
           <div>
             <form id="aboutMeForm">
@@ -145,6 +148,54 @@
             
           </div>
         </template>
+
+        <template is="dom-if" if="{{isHighlightForm(type)}}">
+          <div>
+            <div class="flex-horizontal-with-ratios">
+              <div>
+                <paper-button on-tap="addHighlightItem">
+                  <i class="fa fa-plus"></i>
+                </paper-button>
+              </div>
+              <div class="flexchild" style="color: red; padding-left: 10px;">
+                {{errorMsg}}
+              </div>
+            </div>
+            <form id="highlightsForm">
+              <div class="hightlight-section" style="margin: 0px;">
+                <template is="dom-repeat" items={{highlights}}>
+                  <div class="flex-horizontal-with-ratios">
+                    <div class="flex2child high-child">
+                      <paper-input id="highlight" value="{{item.highlight}}" maxlength="10" label="Highlight">
+                      </paper-input>
+                    </div>
+                    <div class="flexchild high-child">
+                      <paper-input id="unit" value="{{item.unit}}" maxlength="5" label="Unit">
+                        
+                      </paper-input>
+                    </div>
+                    <div class="flex2child high-child">
+                      <paper-input id="text" value="{{item.text}}" maxlength="20" label="Text">
+                      </paper-input>
+                    </div>
+                    <div class="" style="padding-top: 20px;">
+                      <i class="fa fa-close" on-click="removeHighlightItem" id="[[index]]" enum-id={{item.id}}></i>
+                      <!-- <paper-button on-tap="removeHighlightItem" style="min-width: 20px; width: 25px; ">
+                        <i class="fa fa-close"></i>
+                      </paper-button> -->
+                    </div>
+                  </div>                  
+                </template>
+              </div>    
+            </form>
+            <div style="text-align: right; margin-top: 15px;">
+              <paper-button dialog-confirm on-tap="saveHighlights">Save</paper-button>
+            </div>
+          </div>
+          <div>
+            
+          </div>
+        </template>
         
     </template>
     <script>
@@ -162,16 +213,20 @@
                 details: {
                   type: Object,
                   notify: true
+                },
+                highlights: {
+                  type: Array,
+                  notify: true,
+                  value: []
                 }
             },
             ready: function () {
 
             },
             attached: function () {
-              //this.aboutMe
+
             },
             saveForm: function(){
-              //this.set('aboutMe', this.aboutMe)
               var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
               home.set('aboutMe', this.aboutMe);
               home.set('aboutMeTwo', this.aboutMeTwo);
@@ -181,12 +236,42 @@
                     return true;
                 else
                     return false;
-            },
+            },  
             isDetailsForm: function (type) {
                 if(type === 'details')
                     return true;
                 else
                     return false;
+            },
+            isHighlightForm: function (type) {
+                if(type === 'highlights')
+                    return true;
+                else
+                    return false;
+            },
+            addHighlightItem: function(e){
+              if(this.highlights.data && this.highlights.data.length < 5){
+                var i = Polymer.dom(e).rootTarget.id;          
+                this.push('highlights', {id: '-1', highlight: '', unit: '', text: ''});
+                this.saveFlag = true;  
+              }else{
+                this.errorMsg = "You can not have more than 5 Highlights"
+              }
+              
+            },
+            removeHighlightItem: function(e){
+              var i = Polymer.dom(e).rootTarget.id;          
+              this.splice('highlights', i, 1);
+              this.saveFlag = true;
+            },
+            saveHighlights: function(){
+             // var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
+             // var home = Polymer.dom(document.querySelector('#home')).firstElementChild;
+             var home = document.querySelector('msk-home');
+             //home.highlightsData = this.highlights;
+              home.set('highlightsData', this.highlights);
+              console.log("Save Highlights");
+
             },
             saveDetailsForm: function(){
               var home = Polymer.dom(document.querySelector('#home')).firstElementChild;

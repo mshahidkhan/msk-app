@@ -17,10 +17,11 @@
 <link rel="import" href="./msk-education.html">
 <link rel="import" href="./home-about-me.html">
 <link rel="import" href="./msk-customize-button.html">
+<link rel="import" href="./color-selector.html">
 
 <dom-module id="msk-home">
     <template>
-      <style is="custom-style" include="shared-styles">     
+      <style is="custom-style" include="shared-styles">
       
       .msk-title {
           border-bottom: 1px solid #e1e2e5;
@@ -75,20 +76,23 @@
         font-family: 'DancingScript';
         font-size: 18px;
       }
-      .section-four{
+      .section-footer{
         font-family: 'Titillium';
-        background-color: #fff !important;
-        padding-bottom: 25px;
+        background-color: #929292 !important;
+        color: #d3d3d3;
+        font-size: 12px;
+        padding-top: 50px;
+        height: 200px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
       }
       .section-four-head{
         font-family: 'Titillium';
         font-size: 48px;
         padding: 50px;
       }
-      .section-four-subhead{
-        font-family: 'Titillium';
-        font-size: 18px;
-      }
+      
       
       .center-me{
         align-content: center;
@@ -221,7 +225,7 @@
             </home-about-me>
           </div>
           <div class="my-hightlights center">
-            <home-about-me title-me="Highlights" type="myhighlights" my-hightlight="{{aboutMe}}" edit-enabled={{editEnabled}} >
+            <home-about-me title-me="Highlights" id="highlights" type="highlights" highlights-data={{highlightsData}} edit-enabled={{editEnabled}} >
             </home-about-me>
           </div>          
           <div class="my-details center">
@@ -246,11 +250,13 @@
         </div>
       </div>
       <div class="section-footer">        
-        <div class="home-details-section section-four-subhead center-me footer">
+        <div class="home-details-section section-four-subhead">
+          <div style="color: lightgray;"><i class="fa fa-copyright"></i> Copyright - 2016 - www.khanshahid.com</div>    
           <div>This site is built with Google Polymer, Javascript, CSS, HTML5. Frameworks/Libraries, Images, fonts and design used in this project are either Open Source/Free or my personal property.</div>
           <div>If any element of my design/code matches with your personal/proprietary element and/or happen to be personal, please contact me in such case and I will clarify or make amendment accordingly.</div>    
+
         </div>      
-        <div style="color: darkgray;"><i class="fa fa-copyright"></i> Copyright - 2016 - www.khanshahid.com</div>    
+        
       </div>
     </template>
   
@@ -284,8 +290,22 @@
                     codepen: 'https://codepen.io/khanshahid'
                   }
                 }
+              },
+              highlightsData: {
+                type: Array,
+                notify: true,
+                value: [
+                {id:'1', highlight: '10', unit: 'yrs', text: 'experience'}, 
+                {id:'2', highlight: 'Polymer', unit: '', text: 'Google Polymer'}, 
+                {id:'3', highlight: 'NG', unit: '', text: 'Angular, Angular2'}, 
+                {id:'4', highlight: 'Node', unit: '', text: 'Node/Express'}, 
+                {id:'5', highlight: 'Java', unit: '', text: 'Java/Java EE'}],
+                observer: '_highlightsChange'
               }
               
+            },
+            _highlightsChange: function(newObj, oldObj){
+              console.log("Home -> _highlightsChange :", newObj);
             },
             ready: function () {
               this.aboutMe = "I’m a Web Application Developer. I have been developing Web applications & Portals with strong Frontend, Middleware and Backend experience for over 10 years. I am currently working for GE Oil & Gas in Oklahoma City, OK. I hold a master degree of Computer Science from the National Institute of Technology, Bhopal, India. ";
@@ -304,6 +324,12 @@
                   github: 'https://github.com/mshahidkhan',
                   codepen: 'https://codepen.io/khanshahid'
                 }};
+              /*this.highlightsData.data = [
+                {id:'1', highlight: '10', unit: 'yrs', text: 'experience'}, 
+                {id:'2', highlight: 'Polymer', unit: '', text: 'Google Polymer'}, 
+                {id:'3', highlight: 'NG', unit: '', text: 'Angular, Angular2'}, 
+                {id:'4', highlight: 'Node', unit: '', text: 'Node/Express'}, 
+                {id:'5', highlight: 'Java', unit: '', text: 'Java/Java EE'}];*/
             },
           populateData: function(e){
               console.log(e.target.id);
@@ -332,95 +358,4 @@
           }         
         });
     </script>
-</dom-module>
-
-<dom-module is="color-selector">
-  <template>
-    <style include="shared-styles">
-      .color-selection-bar{
-        height: 25px;
-        width: 25px;
-        border:1px transparent;
-      } 
-      paper-button.toast-close{
-        min-width: 15px;
-        width: 15px;
-        float:right;
-      }
-
-    </style>
-
-        <div>
-          <div>
-            <paper-button onclick="toast1.toggle()" class="toast-close">
-              <i class="fa fa-close"></i>
-            </paper-button>
-          <div>
-          <div class="flex-horizontal-with-ratios">
-          <span>Choose primary color -</span>
-            
-          </span>
-          </div>
-          <div class="flex-horizontal-with-ratios">
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
-          </div>
-        </div> 
-        <div>
-          <span>Choose Secondary color -</span>
-          <div class="flex-horizontal-with-ratios">
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
-          </div>
-        </div>
-        <paper-button on-tap="saveColorSelection" class="yellow-button">Save</paper-button>
-        <paper-button onclick="toast1.toggle()" class="yellow-button">Close</paper-button>
-  </template>
-  <script>
-    Polymer({
-      is: "color-selector",
-      properties: {
-
-      },
-      ready: function(){
-
-      },
-      attached: function(){
-        this.colorSelection = {primary: '#00bcd4', secondary: '#ff4081'};
-      },
-      saveColorSelection: function(e){
-        //this.colorSelection.primary =
-        if(this.colorSelection.primary !== ''){
-          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-primary-color"] = this.colorSelection.primary;   
-        } 
-        if(this.colorSelection.secondary !== ''){
-          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-secondary-color"] = this.colorSelection.secondary;
-        }
-        Polymer.updateStyles();
-      },
-      selectPrimaryColor: function(e){
-        console.log('Primary Color Selection');
-        this.colorSelection.primary = e.target.getAttribute('color');
-        //this.parentElement.parentElement.customStyle["--msk-primary-color"] = e.target.getAttribute('color');
-        //this.parentElement.parentElement.updateStyles();
-      },
-      selectSecondaryColor: function(e){ 
-
-        console.log('Secondary Color Selection'+ e.target.getAttribute('color'));
-        this.colorSelection.secondary = e.target.getAttribute('color');
-        //this.parentElement.parentElement.customStyle["--msk-secondary-color"] = e.target.getAttribute('color');
-        //this.parentElement.parentElement.updateStyles();
-      }
-    })
-  </script>
 </dom-module>
