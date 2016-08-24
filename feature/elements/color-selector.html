@@ -75,16 +75,18 @@
       },
       saveColorSelection: function(e){
         //this.colorSelection.primary =
-        if(this.colorSelection.primary !== ''){
-          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-primary-color"] = this.colorSelection.primary;   
-          Polymer.updateStyles();
-        } 
-        if(this.colorSelection.secondary !== ''){
-          this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-secondary-color"] = this.colorSelection.secondary;
+        var parentEle = this.parentElement.parentElement.parentElement.parentElement;
+        var primarySelection = this.colorSelection.primary;  
+        var secondarySelection = this.colorSelection.secondary;
+        if(secondarySelection !== ''){
+          parentEle.customStyle["--msk-secondary-color"] = secondarySelection;
           Polymer.updateStyles();
         }
-        //Polymer.updateStyles();
-
+        if(primarySelection !== ''){
+          parentEle.customStyle["--msk-primary-color"] = primarySelection;
+          Polymer.updateStyles();
+        } 
+        
       },
       selectPrimaryColor: function(e){
         var arr = e.target.parentElement.parentElement.querySelectorAll("a"); 
