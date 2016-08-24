@@ -28,26 +28,24 @@
             
           </span>
           </div>
-          <div class="flex-horizontal-with-ratios">
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
-            <a on-tap="selectPrimaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
+          <div class="flex-horizontal-with-ratios" id="primary-group">
+            <template is="dom-repeat" items=[[colorArray]]>
+              <a on-tap="selectPrimaryColor" 
+                  class="color-selection-bar" style$="{{computeColorStyle(item)}}" color$="{{item}}">
+                  <i class="fa fa-check fa-2x" color$="{{item}}"></i>
+              </a>
+          </template>  
           </div>
         </div> 
         <div>
           <span>Choose Secondary color -</span>
-          <div class="flex-horizontal-with-ratios">
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#00bcd4; color:#00bcd4;" color="#00bcd4"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#ff4081; color:#ff4081;" color="#ff4081"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#C043D5; color:#C043D5;" color="#C043D5"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#73D077; color:#73D077;" color="#73D077"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#1ABBAC; color:#1ABBAC;" color="#1ABBAC"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#EAB82E; color:#EAB82E;" color="#EAB82E"></a>
-            <a on-tap="selectSecondaryColor" class="color-selection-bar" style="background-color:#799CAC; color:#799CAC;" color="#799CAC"></a>  
+          <div class="flex-horizontal-with-ratios" id="secondary-group">
+            <template is="dom-repeat" items=[[colorArray]]>
+              <a on-tap="selectSecondaryColor" 
+                  class="color-selection-bar" style$="{{computeColorStyle(item)}}" color$="{{item}}">
+                  <i class="fa fa-check fa-2x" color$="{{item}}"></i>
+              </a>
+            </template>  
           </div>
         </div>
         <paper-button on-tap="saveColorSelection" class="yellow-button">Save</paper-button>
@@ -57,10 +55,20 @@
     Polymer({
       is: "color-selector",
       properties: {
+        colorArray: {
+          type: Array,
+          notify: true
+        }
+      },
+      computeColorStyle: function(color){
+        var styles = '';
+        styles +=  "text-align:center; background-color:"+ color + ";color: " + color + ";border:1px solid "+color;
+        console.log('Styles ---->', styles);
+        return styles;
 
       },
       ready: function(){
-
+        this.colorArray = ["#00bcd4","#ff4081","#C043D5","#73D077","#1ABBAC","#EAB82E","#799CAC"];
       },
       attached: function(){
         this.colorSelection = {primary: '#00bcd4', secondary: '#ff4081'};
@@ -76,16 +84,27 @@
         Polymer.updateStyles();
       },
       selectPrimaryColor: function(e){
-        console.log('Primary Color Selection');
+        var arr = e.target.parentElement.parentElement.querySelectorAll("a"); 
+        arr.forEach(function(obj, i){
+          obj.style.color = obj.style.backgroundColor; 
+        });
+        if(!e.target.getAttribute('color')){
+          console.log("No Primary Color");
+        }
         this.colorSelection.primary = e.target.getAttribute('color');
-        //this.parentElement.parentElement.customStyle["--msk-primary-color"] = e.target.getAttribute('color');
+        e.target.parentNode.style.color = "#fff"
         //this.parentElement.parentElement.updateStyles();
       },
       selectSecondaryColor: function(e){ 
-
-        console.log('Secondary Color Selection'+ e.target.getAttribute('color'));
+        var arr = e.target.parentElement.parentElement.querySelectorAll("a"); 
+        arr.forEach(function(obj, i){
+           obj.style.color = obj.style.backgroundColor; 
+        });
+        if(!e.target.getAttribute('color')){
+          console.log("No Primary Color");
+        }
         this.colorSelection.secondary = e.target.getAttribute('color');
-        //this.parentElement.parentElement.customStyle["--msk-secondary-color"] = e.target.getAttribute('color');
+        e.target.parentNode.style.color = "#fff"
         //this.parentElement.parentElement.updateStyles();
       }
     })
