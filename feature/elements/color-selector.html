@@ -77,11 +77,14 @@
         //this.colorSelection.primary =
         if(this.colorSelection.primary !== ''){
           this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-primary-color"] = this.colorSelection.primary;   
+          Polymer.updateStyles();
         } 
         if(this.colorSelection.secondary !== ''){
           this.parentElement.parentElement.parentElement.parentElement.customStyle["--msk-secondary-color"] = this.colorSelection.secondary;
+          Polymer.updateStyles();
         }
-        Polymer.updateStyles();
+        //Polymer.updateStyles();
+
       },
       selectPrimaryColor: function(e){
         var arr = e.target.parentElement.parentElement.querySelectorAll("a"); 
